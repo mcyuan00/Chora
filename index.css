@@ -15,7 +15,7 @@ body {
 }
 
 #wrapper {
-    padding-left: 0;
+    padding-right: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -23,13 +23,13 @@ body {
 }
 
 #wrapper.toggled {
-    padding-left: 250px;
+    padding-right: 250px;
 }
 
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    right: 0px;
     width: 0;
     height: 100%;
     margin-left: -250px;
@@ -53,16 +53,16 @@ body {
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-right: -250px;
+    margin-left: -250px;
 }
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
+        padding-right: 0px;
     }
 
     #wrapper.toggled {
-        padding-left: 0;
+        padding-right: 0;
     }
 
     #sidebar-wrapper {
@@ -80,6 +80,6 @@ body {
 
     #wrapper.toggled #page-content-wrapper {
         position: relative;
-        margin-right: 0;
+        margin-left: 0;
     }
 }
