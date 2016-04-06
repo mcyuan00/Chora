@@ -5,3 +5,11 @@ body {
 #header {
   background-color: #459cb6;
 }
+
+#sidebar{
+  background-color: #7addcd;
+  float:right;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+}
