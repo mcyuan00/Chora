@@ -1,3 +1,4 @@
+$(document).ready(function() {  
 var slides = [], currentSlide = null;
    $('#newFormation').click(function(e){
       if (slides.length > 0) {
@@ -49,6 +50,7 @@ var slides = [], currentSlide = null;
       slides.push(div);
       currentSlide = div;
   });
+});
 
 $("#menu-toggle").click(function(e) {
 	e.preventDefault();
