@@ -1,3 +1,55 @@
+var slides = [], currentSlide = null;
+   $('#newFormation').click(function(e){
+      if (slides.length > 0) {
+        for (var i = 0; i < slides.length; ++i) {
+          slides[i].style.display = "none";
+        }
+      };
+      var div = document.createElement("div");
+      div.style.width = "100%";
+      div.style.height = "100%";
+      document.getElementById('content').appendChild(div);
+      slides.push(div);
+      currentSlide = div;
+      });
+
+   $('#newTransition').click(function(e){
+     if (slides.length > 0) {
+        for (var i = 0; i < slides.length; ++i) {
+          slides[i].style.display = "none";
+        }
+      };
+      var div = document.createElement("div");
+      div.style.width = "100%";
+      div.style.height = "100%";
+
+      var previousFormation = currentSlide; //copy of previous formation
+      var transition = previousFormation.cloneNode(true);
+      transition.style.background = "red";
+      transition.style.display = "block";
+      div.appendChild(transition);
+
+      var overlayTransition = document.createElement("div"); //for dragging and dropping
+      overlayTransition.style.width = "100%";
+      overlayTransition.style.height = "100%";
+      overlayTransition.style.position = "absolute";
+      overlayTransition.style.left = "0";
+      overlayTransition.style.top = "0";
+      overlayTransition.style.display = "block";
+      div.appendChild(overlayTransition);
+
+      var c = document.createElement("CANVAS"); //for arrows
+      c.width  = "100%";
+      c.height = "100%";
+      c.style.zIndex   = 10;
+      c.style.position = "absolute";
+      div.appendChild(c);
+
+      document.getElementById("content").appendChild(div);
+      slides.push(div);
+      currentSlide = div;
+  });
+
 $("#menu-toggle").click(function(e) {
 	e.preventDefault();
 	$("#wrapper").toggleClass("toggled");
