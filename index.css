@@ -28,6 +28,10 @@ body {
   background-color: #459cb6;
 }
 
+h2 {
+  font-size: 14pt;
+}
+
 #sidebar{
   background-color: #7addcd;
   float:right;
@@ -109,4 +113,81 @@ body {
         position: relative;
         margin-left: 0;
     }
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #e4e6e9;
+}
+.sidebar {
+  float: right;
+  width: 50px;
+  background-color: #f2f2f2;
+}
+.sidebar.maximized {
+  width: 250px;
+}
+
+.sidebar li: hover {
+  border-left: 4px solid #666;
+}
+.sidebar li.active {
+  border-left: 4px solid #459cb6;
+}
+
+
+.sidebar .icon-double-angle-left,
+.sidebar .icon-double-angle-right{
+  display: inline-block;
+  cursor: pointer;
+  font-size: 14px;
+  color: #aaa;
+  border: 1px solid #bbb;
+  padding: 0 5px;
+  margin : 0;
+  line-height: 18px;
+  border-radius: 16px;
+  background-color: #fff;
+  position: relative;
+  position:absolute;
+  top : 50%;
+  right : 240px;
+}
+
+.sidebar .icon-double-angle-right {
+  right : 40px;
+}
+
+.icon-double-angle-left:before {
+content: "\f100";
+}
+
+.icon-double-angle-right:before {
+content: "\f101";
+}
+
+.body {
+  margin-right: 190px;
+  padding: 0 5px;
+  background: white;
+  border: 1px solid #ccc;
+  border-width: 0 0 0 1px;
+  min-height: 100%;
+}
+.body.minimized {
+  margin-right: 50px;
+}
+
+.tab-content {
+  margin-left: 0px;
+}
+.tab-content .tab-pane {
+  display: none;
+  background-color: #f2f2f2;
+  padding: 1.6rem;
+  overflow-y: auto;
+}
+.tab-content .active {
+  display: block;
 }

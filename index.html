@@ -1,13 +1,24 @@
 <html>
 
+
 <head>
-    <title>Chora</title>
+    <!-- <title>Chora</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+<!-- trying another toggle bar -->
+    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <link data-require="bootstrap-css@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+    <link data-require="bootstrap@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+    <link data-require="font-awesome@*" data-semver="4.0.3" rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <script data-require="bootstrap@*" data-semver="3.0.2" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
     <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 </head>
 
 <body>
-    <div id="wrapper">
+
+
+    <!-- <div id="wrapper">
         <div id="header">
             Chora
         </div>
@@ -20,7 +31,7 @@
                         <td><input class = "formation" type="image" src="images/formation.jpg" /></td>
                     </tr>
                     <tr>
-                        <td><<input class = "formation" type="image" src="images/formation2.jpg" /></td>
+                        <td><input class = "formation" type="image" src="images/formation2.jpg" /></td>
                     </tr>
                     <tr>
                         <td><input class = "formation" type="image" src="images/formation3.jpg" /></td>
@@ -41,16 +52,55 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    </div> -->
+    <div id="header">
+            Chora
+        </div>
+      <div class="sidebar maximized">
+            <div class="tabs-left">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#a" data-toggle="tab"><span class="glyphicon glyphicon-th"></span></a></li>
+                <li><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-transfer"></span></a></li>
+                <li><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-user"></span></a></li>
+              </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="a">
+                <h2>Formations</h2>
+                <table>
+                    <tr>
+                        <td><input class = "formation" type="image" src="images/formation.jpg" /></td>
+                    </tr>
+                    <tr>
+                        <td><input class = "formation" type="image" src="images/formation2.jpg" /></td>
+                    </tr>
+                    <tr>
+                        <td><input class = "formation" type="image" src="images/formation3.jpg" /></td>
+                    </tr>
+                    <tr>
+                        <td><input class = "formation" type="image" src="images/formation4.jpg" /></td>
+                    </tr>
+                </table>
+              </div>
+              
+              <div class="tab-pane" id="b">
+                  <h2>Transitions</h2>
+              </div>
+              
+              <div class="tab-pane" id="c">
+                  <h2>Dancers</h2>
+              </div>
+              
+            </div><!-- /tab-content -->
+            </div><!-- /tabbable -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!--<script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="external_js/jquery-1.9.0.min.js"></script> -->
-    <script type="text/javascript" src="index.js"></script>
+
+      <a href="javascript:onClick();" class="angle icon-double-angle-left"></a>
+    </div>
+    
+    <div class="body">
+  
+    </div>
+
 </body>
 
 </html>
