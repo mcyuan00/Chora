@@ -1,4 +1,5 @@
 $(document).ready(function() {  
+
 var slides = [], currentSlide = null;
    $('#newFormation').click(function(e){
       if (slides.length > 0) {
@@ -52,10 +53,16 @@ var slides = [], currentSlide = null;
   });
 });
 
-$("#menu-toggle").click(function(e) {
-	e.preventDefault();
-	$("#wrapper").toggleClass("toggled");
-});
+x_pos = 0, y_pos = 0;
+x_elem = 0, y_elem = 0;
+
+document.onmousedown(
+		function(e){
+			x_pos = document.all ? window.event.clientX : e.pageX;
+            y_pos = document.all ? window.event.clientY : e.pageY;
+            console.log(x_pos);
+		}
+	)
 
 var onClick = function () {
   var sidebar = document.querySelector('.sidebar');
