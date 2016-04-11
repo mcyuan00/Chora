@@ -89,9 +89,11 @@ canvas {
 }
 
 h2 {
-  font-size: 14pt;
+  font-size: 20pt;
+  font-family: 'Amatic SC', cursive;
   margin: 0;
   color: #459cb6;
+  text-align: center;
 }
 
 /*#sidebar{

@@ -4,9 +4,11 @@ $(document).ready(function() {
       event.target.innerHTML = "hit";
   });
 
-var slides = [], currentSlide = null;
-   $('#newFormation').click(function(e){
-      if (slides.length > 0) {
+var slides = [];
+   $('#newFormation').click(makeNewSlide);
+
+function makeNewSlide(){
+	if (slides.length > 0) {
         for (var i = 0; i < slides.length; ++i) {
           slides[i].style.display = "none";
         }
@@ -17,7 +19,7 @@ var slides = [], currentSlide = null;
       document.getElementById('content').appendChild(div);
       slides.push(div);
       currentSlide = div;
-      });
+}
 
    $('#newTransition').click(function(e){
      if (slides.length > 0) {
