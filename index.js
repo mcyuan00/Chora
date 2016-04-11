@@ -3,8 +3,12 @@ $(document).ready(function() {
     if (event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") 
       event.target.innerHTML = "hit";
   });
+var currentSlide = document.createElement("div");
+currentSlide.style.width = "100%";
+currentSlide.style.height = "100%";
+document.getElementById('content').appendChild(currentSlide);
+var slides = [currentSlide];
 
-var slides = [];
    $('#newFormation').click(makeNewSlide);
 
 function makeNewSlide(){
