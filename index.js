@@ -1,15 +1,18 @@
 $(document).ready(function() {  
+  
   $(document).click(function(event) {
-    if (event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") 
+    if (event.target.parentNode.id == "content" || event.target.parentNode.className == "transition"){
       event.target.innerHTML = "hit";
+  	};
   });
+//initializing single slide in slides 
 var currentSlide = document.createElement("div");
 currentSlide.style.width = "100%";
 currentSlide.style.height = "100%";
 document.getElementById('content').appendChild(currentSlide);
 var slides = [currentSlide];
 
-   $('#newFormation').click(makeNewSlide);
+$('#newFormation').click(makeNewSlide);
 
 function makeNewSlide(){
 	if (slides.length > 0) {
@@ -63,17 +66,6 @@ function makeNewSlide(){
       currentSlide = div;
   });
 });
-
-x_pos = 0, y_pos = 0;
-x_elem = 0, y_elem = 0;
-
-/*document.onmousedown(
-		function(e){
-			x_pos = document.all ? window.event.clientX : e.pageX;
-            y_pos = document.all ? window.event.clientY : e.pageY;
-            console.log(x_pos);
-		}
-	)*/
 
 var onClick = function () {
   var sidebar = document.querySelector('.sidebar');
