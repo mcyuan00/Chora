@@ -133,6 +133,7 @@ h2 {
 html,
 body {
   height: 100%;
+  overflow: hidden;
   /*background-color: #e4e6e9;*/
 }
 .sidebar {
@@ -211,6 +212,8 @@ content: "\f101";
 }
 
 .formation{
-    width: 225px;
-    margin: 10px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
 }
