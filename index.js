@@ -1,4 +1,8 @@
 $(document).ready(function() {  
+  $(document).click(function(event) {
+    if (event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") 
+      event.target.innerHTML = "hit";
+  });
 
 var slides = [], currentSlide = null;
    $('#newFormation').click(function(e){
@@ -24,6 +28,7 @@ var slides = [], currentSlide = null;
       var div = document.createElement("div");
       div.style.width = "100%";
       div.style.height = "100%";
+      div.className = "transition";
 
       var previousFormation = currentSlide; //copy of previous formation
       var transition = previousFormation.cloneNode(true);
@@ -56,13 +61,13 @@ var slides = [], currentSlide = null;
 x_pos = 0, y_pos = 0;
 x_elem = 0, y_elem = 0;
 
-document.onmousedown(
+/*document.onmousedown(
 		function(e){
 			x_pos = document.all ? window.event.clientX : e.pageX;
             y_pos = document.all ? window.event.clientY : e.pageY;
             console.log(x_pos);
 		}
-	)
+	)*/
 
 var onClick = function () {
   var sidebar = document.querySelector('.sidebar');

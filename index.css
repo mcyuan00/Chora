@@ -1,16 +1,12 @@
-.dropbtn {
-    /*background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;*/
+canvas {
+  pointer-events: none;
 }
-
 .dropdown {
   position: absolute;
-  top: 0; left: 0;
-  text-align: left;
+  top: 11%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 50;
 }
 
 .dropdown-content {
@@ -19,7 +15,6 @@
     background-color: none;
     min-width: 160px;
     overflow-y: auto; 
-    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
 }
 
 .dropdown-content a {
@@ -36,19 +31,22 @@
 }
 
 .body #content{
-	border: .5px solid black;
+	border: .25px solid #454439;
 	background-color: #FFFFFF;
-	width: 500px; height: 425px;
+	width: 525px; height: 375px;
 	position: absolute;
 	left: 50%; top: 50%;
-  z-index: 20px;
-	/*-webkit-transform: translate(-50%, -50%);*/
+  z-index: 20;
 	transform: translate(-50%, -50%);
 }
 
-
-.btn{
-  -webkit-border-radius: 28;
+.dropbtn{
+  box-shadow: 1px 2px .5px #888888;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: #459cb6;
+  border: none;
+  /*-webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 28px;
   font-family: Arial;
@@ -56,7 +54,7 @@
   font-size: 20px;
   background: #3498db;
   padding: 10px 20px 10px 20px;
-  text-decoration: none;
+  text-decoration: none;*/
 }
 
 .btn:hover {
@@ -68,13 +66,26 @@
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
-
+#cross {
+  font-family: 'Amatic SC', cursive;
+  padding: 0; margin: 0;
+  font-size: 25pt;
+  color: #fcfcf7;
+}
 #header {
-  background-color: #459cb6;
-  padding: 7px;
-  color: #fff;
+  /*background-color: #459cb6;*/
+  display: inline-block;
+  /*padding: 0px;
+  /*color: #fff;
   font-size: 14pt;
-  text-align: center;
+  text-align: center;*/
+}
+#logo {
+  font-family: 'Amatic SC', cursive;
+  font-size: 55pt;
+  margin: 0; padding: 0;
+  color: rgb(122,200,275);
+  padding-left: 35px; padding-top: 8px;
 }
 
 h2 {
@@ -169,7 +180,7 @@ h2 {
 html,
 body {
   height: 100%;
-  background-color: #e4e6e9;
+  /*background-color: #e4e6e9;*/
 }
 .sidebar {
   float: right;

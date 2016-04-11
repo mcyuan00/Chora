@@ -4,6 +4,7 @@
 <head>
     <title>Chora</title>
     <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
     <link data-require="bootstrap-css@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
     <link data-require="bootstrap@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
     <link data-require="font-awesome@*" data-semver="4.0.3" rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
@@ -15,15 +16,17 @@
 
 <body>
     <div id="header">
-            Chora
-            <div class="dropdown">
-            <button class="dropbtn"><span class="glyphicon glyphicon-plus"></span></button>
-            <div class="dropdown-content">
-                <input id="newFormation" type="button" value="Formation"/>
-                <input id="newTransition" type="button" value="Transition"/>
-            </div>
-            </div>
+            <p id = "logo">Chora</p>
     </div>
+    
+    <div class="dropdown">
+      <button class="dropbtn"><p id = "cross">&#10010</p></button>
+      <div class="dropdown-content">
+        <input id="newFormation" type="button" value="Formation"/>
+        <input id="newTransition" type="button" value="Transition"/>
+      </div>
+    </div>
+    
     <div class="sidebar maximized">
             <div class="tabs-left">
               <ul class="nav nav-tabs">
