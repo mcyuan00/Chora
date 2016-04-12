@@ -1,4 +1,5 @@
 $(document).ready(function() {  
+  $.justwave({ showname: 0});
   
   $(document).click(function(event) {
     if (event.target.parentNode.id == "content" || event.target.parentNode.className == "transition"){

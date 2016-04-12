@@ -2,15 +2,22 @@
 
 
 <head>
-    <title>Chora</title>
-    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
-    <link data-require="bootstrap-css@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
-    <link data-require="bootstrap@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
-    <link data-require="font-awesome@*" data-semver="4.0.3" rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-    <script data-require="bootstrap@*" data-semver="3.0.2" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-    <script src="index.js"></script>
-    <link rel="stylesheet" href="index.css" />
+  <title>Chora</title>
+  <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
+  <link data-require="bootstrap-css@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+  <link data-require="bootstrap@*" data-semver="3.0.2" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+  <link data-require="font-awesome@*" data-semver="4.0.3" rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+  <script data-require="bootstrap@*" data-semver="3.0.2" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="index.css" />
+
+  <!-- include jQuery library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+
+  <!-- include JustWave Player css and js files -->
+  <link type="text/css" rel="stylesheet" href="justwave/justwave.player.css">
+  <script src="justwave/justwave.player-min.js"></script>
 
 </head>
 
@@ -68,7 +75,12 @@
     </div> <!--ending sidebar -->
     
     <div class="body">
-        <div id="content"></div> 
+      <div id="content"></div>
+      <div id="home-player">
+        <audio data-wave_color="#3F87BE" data-prog_color="#10EFAD" width="1100" height="100" data-buttoncolor="#337AB7">
+          <source src="Roses.mp3" type="audio/mpeg">
+        </audio>
+        </div> 
     </div>
 
 </body>
