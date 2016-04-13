@@ -1,7 +1,7 @@
 $(document).ready(function() {  
   $.justwave({ showname: 0});
     
-  var slides = [], currentSlide = null; slideNum = 0, chosen = {}, x = 0, y = 0;
+  var slides = [], currentSlide = null; slideNum = 0, chosen = new Array(), x = 0, y = 0;
 
 
   $(document).click(function(event) {
@@ -22,8 +22,8 @@ $(document).ready(function() {
   });
   $('#menu').click(function(e){
     var placeDancer = e.target;
-    if (!(e.target.innerHTML in chosen)) {
-      chosen[e.target.innerHTML] = 0;
+    if (!(placeDancer.textContent in chosen) && placeDancer.textContent.length ==2) {
+      chosen[e.target.textContent] = 0;
       var dancerFinal = createDancer(e.target.innerHTML);
       currentSlide.appendChild(dancerFinal);
       dancerFinal.style.left = x + "px"; dancerFinal.style.top = y + "px";
@@ -46,7 +46,6 @@ document.getElementById('menu').appendChild(createDancer("BO"));
 
 function createDancer (dancerName) {
   var dancer = document.createElement("div");
-  chosen = {};
   dancer.style.width = "50px"; dancer.style.height = "50px";
   dancer.style.position = "relative";
   dancer.style.borderRadius = "50%";
@@ -63,6 +62,7 @@ function createDancer (dancerName) {
 
 $('#newFormation').click(makeNewSlide);
 function makeNewSlide(){
+  chosen = new Array()
   document.getElementById('menu').style.display = "none";
   if (slides.length > 0) {
     for (var i = 0; i < slides.length; ++i) {
