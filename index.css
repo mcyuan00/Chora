@@ -65,9 +65,8 @@ canvas {
 
 }
 
-
 .body #content{
-	border: .25px solid #454439;
+	border: .25px dotted #454439;
 	background-color: #FFFFFF;
 	width: 525px; height: 375px;
 	position: absolute;
@@ -89,11 +88,17 @@ canvas {
   transform: translate(-50%, -50%);
 }
 
-.body #home-player{
-  /*width: 525px; height: 75px;*/
+.body #waveform{
+  width: 80%; height: 75px;
   position: absolute;
   bottom: 0%;
 }
+
+.body #playbutton{
+  bottom:75px;
+  position: absolute;
+}
+
 .dropbtn{
   box-shadow: 1px 2px .5px #888888;
   width: 50px; height: 50px;

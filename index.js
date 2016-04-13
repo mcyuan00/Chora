@@ -1,10 +1,58 @@
 $(document).ready(function() {  
-  $.justwave({ showname: 0});
-    
+  var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: '#7addcd',
+      progressColor: '#459cb6', 
+      height: 75
+  });
+  wavesurfer.load('./Roses.mp3');
+
+  var playButton = document.getElementById("play");
+  playButton.onclick=function(){
+    wavesurfer.playPause();
+  }
+
   var slides = [], currentSlide = null; slideNum = 0, chosen = new Array(), x = 0, y = 0;
 
+var selected = null, // Object of the element to be moved
+    x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
+    x_elem = 0, y_elem = 0; // Stores top, left values (edge) of the element
 
-  $(document).click(function(event) {
+// Will be called when user starts dragging an element
+function _drag_init(elem) {
+    // Store the object of the element which needs to be moved
+    selected = elem;
+    x_elem = x_pos - selected.offsetLeft;
+    y_elem = y_pos - selected.offsetTop;
+}
+
+// Will be called when user dragging an element
+function _move_elem(e) {
+    x_pos = document.all ? window.event.clientX : e.pageX;
+    y_pos = document.all ? window.event.clientY : e.pageY;
+    if (selected !== null) {
+        selected.style.left = (x_pos - x_elem) + 'px';
+        selected.style.top = (y_pos - y_elem) + 'px';
+    }
+}
+
+// Destroy the object when we are done
+function _destroy() {
+    selected = null;
+}
+
+// Bind the functions...
+document.onmousedown = function (e) {
+    if(e.target.className == "placed"){
+      _drag_init(e.target);
+      return false;
+  }
+};
+
+document.onmousemove = _move_elem;
+
+  $(document).mouseup(function(event) {
+    _destroy();
     if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") && document.getElementById('menu').style.display != "inline-block"){
       x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
       document.getElementById('menu').style.display = "inline-block";
@@ -31,6 +79,7 @@ $(document).ready(function() {
     if (!(placeDancer.textContent in chosen) && placeDancer.textContent.length ==2) {
       chosen[e.target.textContent] = 0;
       var dancerFinal = createDancer(e.target.innerHTML);
+      dancerFinal.className = "placed";
       currentSlide.appendChild(dancerFinal);
       dancerFinal.style.left = x + "px"; dancerFinal.style.top = y + "px";
       dancerFinal.style.position = "absolute";
@@ -87,7 +136,7 @@ function makeNewSlide(){
 }
 
  $('#newTransition').click(function(e){
-   document.getElementById('menu').style.display = "none";
+  document.getElementById('menu').style.display = "none";
    if (slides.length > 0) {
       for (var i = 0; i < slides.length; ++i) {
         slides[i].style.display = "none";
@@ -96,9 +145,18 @@ function makeNewSlide(){
     var div = document.createElement("div");
     div.style.width = "100%";
     div.style.height = "100%";
-    div.className = "transition";
+    
+    var elem = document.createElement("img");
+    elem.setAttribute("src", "images/dummy.png");
+    elem.setAttribute("width", "100%");
+    div.appendChild(elem);
+    console.log(div);
+    document.getElementById("content").appendChild(div);
+    slides.push(div);
+    currentSlide = div;
+    slideNum += 1;
 
-    var previousFormation = currentSlide; //copy of previous formation
+    /*var previousFormation = currentSlide; //copy of previous formation
     var transition = previousFormation.cloneNode(true);
     transition.style.display = "block";
     div.appendChild(transition);
@@ -121,7 +179,7 @@ function makeNewSlide(){
 
     document.getElementById("content").appendChild(div);
     slides.push(div);
-    currentSlide = div;
+    currentSlide = div;*/
 });
 
 $('#next-btn').click(function(e){
@@ -148,6 +206,7 @@ $('#previous-btn').click(function(e){
   }
 });
 
+/*
 function DragDrop(){
   document.onmousedown = OnMouseDown;
   document.onmouseup = OnMouseUp;
@@ -230,8 +289,9 @@ function OnMouseUp(e){
 }
 
 DragDrop();
-
+*/
 });
+
 
 var onClick = function () {
   var sidebar = document.querySelector('.sidebar');
