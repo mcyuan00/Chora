@@ -17,8 +17,14 @@ $(document).ready(function() {
     }
   });
 
-  $('#menu').mouseover(function(){
-    document.getElementById("menu").style.cursor = "pointer";
+  $('#menu').mouseover(function(e){
+    console.log(e.target.className);
+    if (e.target.className == "dance") {
+      document.getElementById("menu").style.cursor = "pointer";
+    } else {
+      document.getElementById("menu").style.cursor = "default";
+
+    }
   });
   $('#menu').click(function(e){
     var placeDancer = e.target;
@@ -53,10 +59,12 @@ function createDancer (dancerName) {
   dancer.style.float = "left";
   dancer.style.marginRight = "10px";
   var name = document.createElement("div");
+  name.className = "dance";
   name.innerHTML = dancerName; name.style.position = "absolute"; name.style.top = "50%"; 
   name.style.left = "50%"; name.style.transform = "translate(-50%, -50%)";
   name.style.color = "white";
   dancer.appendChild(name);
+  dancer.className = "dance";
   return dancer;
 }
 
