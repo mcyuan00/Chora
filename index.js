@@ -1,8 +1,8 @@
 $(document).ready(function() {  
   var wavesurfer = WaveSurfer.create({
       container: '#waveform',
-      waveColor: 'violet',
-      progressColor: 'purple', 
+      waveColor: '#7addcd',
+      progressColor: '#459cb6', 
       height: 75
   });
   wavesurfer.load('./Roses.mp3');
