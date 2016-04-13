@@ -1,6 +1,17 @@
 $(document).ready(function() {  
-  $.justwave({ showname: 0});
-    
+  var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: 'violet',
+      progressColor: 'purple', 
+      height: 75
+  });
+  wavesurfer.load('./Roses.mp3');
+
+  var playButton = document.getElementById("play");
+  playButton.onclick=function(){
+    wavesurfer.playPause();
+  }
+
   var slides = [], currentSlide = null; slideNum = 0, chosen = new Array(), x = 0, y = 0;
 
     var selected = null, // Object of the element to be moved
@@ -172,38 +183,25 @@ function makeNewSlide(){
 });
 
 $('#next-btn').click(function(e){
-  console.log(currentSlide.childNodes);
-  if (slideNum < slides.length -1){
-    currentSlide.style.zIndex = '10';
-    for (var i in currentSlide.childNodes){
-      currentSlide.childNodes[i].style.zIndex = '10';
-    }
+  if (slideNum < slides.length){
+    currentSlide.style.display = "none";
     
     slideNum = slideNum + 1;
-    currentSlide = slides[slideNum];
-    currentSlide.style.zIndex = '20';
-    for (var i in currentSlide.childNodes){
-      currentSlide.childNodes[i].style.zIndex = '20';
-    }
+    currentSlide = slides[slideNum - 1];
+    currentSlide.style.display = 'block';
+    
     console.log(slideNum);
   }
 });
 
 $('#previous-btn').click(function(e){
-  if (slideNum > 0){
-    currentSlide.style.zIndex = '10';
-    console.log(currentSlide.childNodes);
-    for (var i in currentSlide.childNodes){
-      console.log(currentSlide.childNodes[i]);
-      currentSlide.childNodes[i].style.zIndex = '10';
-    }
+  if (slideNum > 1){
+    currentSlide.style.display = 'none';
+    
     slideNum = slideNum - 1;
-    currentSlide = slides[slideNum];
-    currentSlide.style.zIndex = '20';
-    console.log(currentSlide.childNodes);
-    for (var i in currentSlide.childNodes){
-      currentSlide.childNodes[i].style.zIndex = '20';
-    }
+    currentSlide = slides[slideNum - 1];
+    currentSlide.style.display = "block";
+
     console.log(slideNum);
   }
 });
@@ -236,6 +234,7 @@ function OnMouseDown(e){
     offsetX = ExtractNumber(target.style.left);
     offsetY = ExtractNumber(target.style.top);
     dragElement = target.cloneNode(true);
+    console.log(dragElement);
 
     oldZ = target.style.zIndex;
     dragElement.style.zIndex = 1000;
@@ -274,8 +273,13 @@ function OnMouseUp(e){
       dragElement.style.left = e.clientX;
     }
     dragElement.style.zIndex = oldZ;
+    console.log(e.target.parentNode.id);
 
+<<<<<<< HEAD
     if (e.target.parentNode.id == "content" && dragElement.className != "placedDancer"){
+=======
+    if (e.target.parentNode.id === "content"){
+>>>>>>> 428e347ed3ef96559e6cb1d58bab7761f86cc8f4
 
       var formation = dragElement;
 
@@ -286,7 +290,7 @@ function OnMouseUp(e){
       formation.style.top = "0";
       formation.style.display = "block";
       formation.style.zIndex = "20";
-      slides[slideNum].appendChild(formation);
+      currentSlide.appendChild(formation);
     }
 
     document.onmousemove = null;
@@ -300,7 +304,7 @@ function OnMouseUp(e){
 DragDrop();
 */
 
-});
+// });
 
 var onClick = function () {
   var sidebar = document.querySelector('.sidebar');
