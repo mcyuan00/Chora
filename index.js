@@ -14,53 +14,8 @@ $(document).ready(function() {
 
   var slides = [], currentSlide = null; slideNum = 0, chosen = new Array(), x = 0, y = 0;
 
-    var selected = null, // Object of the element to be moved
-    x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
-    x_elem = 0, y_elem = 0; // Stores top, left values (edge) of the element
 
-// Will be called when user starts dragging an element
-function _drag_init(elem) {
-    // Store the object of the element which needs to be moved
-    selected = elem;
-    x_elem = x_pos - selected.offsetLeft;
-    y_elem = y_pos - selected.offsetTop;
-}
-
-// Will be called when user dragging an element
-function _move_elem(e) {
-    x_pos = e.clientX;
-    y_pos = e.clientY;
-    if (selected !== null) {
-        selected.style.left = (x_pos - x_elem) + 'px';
-        selected.style.top = (y_pos - y_elem) + 'px';
-    }
-}
-
-// Destroy the object when we are done
-function _destroy() {
-    selected = null;
-}
-
-
-document.onmousedown = function(e){
-    e = e || window.event;
-    var target = e.target || e.srcElement;
-    console.log(e.target.className);
-    if(e.target.className == "placedDancer"){
-      _drag_init(e.target);
-      return false;
-    }
-  };
-
-
-document.onmousemove = _move_elem;
-
-
-
-
-
-  $(document).mouseup(function(event) {
-    _destroy();
+  $(document).click(function(event) {
     if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") && document.getElementById('menu').style.display != "inline-block"){
       x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
       document.getElementById('menu').style.display = "inline-block";
@@ -71,11 +26,10 @@ document.onmousemove = _move_elem;
     } else {
       document.getElementById('menu').style.display = "none";
     }
-  
   });
 
   $('#menu').mouseover(function(e){
-    //console.log(e.target.className);
+    console.log(e.target.className);
     if (e.target.className == "dance") {
       document.getElementById("menu").style.cursor = "pointer";
     } else {
@@ -83,12 +37,11 @@ document.onmousemove = _move_elem;
 
     }
   });
-  $('#menu').mouseup(function(e){
+  $('#menu').click(function(e){
     var placeDancer = e.target;
     if (!(placeDancer.textContent in chosen) && placeDancer.textContent.length ==2) {
       chosen[e.target.textContent] = 0;
       var dancerFinal = createDancer(e.target.innerHTML);
-      dancerFinal.className = "placedDancer";
       currentSlide.appendChild(dancerFinal);
       dancerFinal.style.left = x + "px"; dancerFinal.style.top = y + "px";
       dancerFinal.style.position = "absolute";
@@ -206,7 +159,6 @@ $('#previous-btn').click(function(e){
   }
 });
 
-/*
 function DragDrop(){
   document.onmousedown = OnMouseDown;
   document.onmouseup = OnMouseUp;
@@ -217,18 +169,14 @@ var startY;
 var offsetX;
 var offsetY;
 var oldZ;
-var dragElement;
+var dragElement
 
 function OnMouseDown(e){
-
-  console.log(e.target.className);
-
   e = e || window.event;
 
   var target = e.target || e.srcElement;
 
-
-  if ((target.type == "image" && target.className == "formation") || target.className == "placedDancer"){
+  if (target.type == "image" && target.className == "formation"){
     startX = e.clientX;
     startY = e.clientY;
     offsetX = ExtractNumber(target.style.left);
@@ -267,19 +215,10 @@ function ExtractNumber(value){
 
 function OnMouseUp(e){
   if (dragElement != null){
-    if(dragElement.className == "placedDancer"){
-      console.log(e.clientY);
-      dragElement.style.top = e.clientY;
-      dragElement.style.left = e.clientX;
-    }
     dragElement.style.zIndex = oldZ;
     console.log(e.target.parentNode.id);
 
-<<<<<<< HEAD
-    if (e.target.parentNode.id == "content" && dragElement.className != "placedDancer"){
-=======
     if (e.target.parentNode.id === "content"){
->>>>>>> 428e347ed3ef96559e6cb1d58bab7761f86cc8f4
 
       var formation = dragElement;
 
@@ -302,9 +241,8 @@ function OnMouseUp(e){
 }
 
 DragDrop();
-*/
 
-// });
+});
 
 var onClick = function () {
   var sidebar = document.querySelector('.sidebar');
