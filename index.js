@@ -136,7 +136,7 @@ function makeNewSlide(){
 }
 
  $('#newTransition').click(function(e){
-   document.getElementById('menu').style.display = "none";
+  document.getElementById('menu').style.display = "none";
    if (slides.length > 0) {
       for (var i = 0; i < slides.length; ++i) {
         slides[i].style.display = "none";
@@ -145,9 +145,18 @@ function makeNewSlide(){
     var div = document.createElement("div");
     div.style.width = "100%";
     div.style.height = "100%";
-    div.className = "transition";
+    
+    var elem = document.createElement("img");
+    elem.setAttribute("src", "images/dummy.png");
+    elem.setAttribute("width", "100%");
+    div.appendChild(elem);
+    console.log(div);
+    document.getElementById("content").appendChild(div);
+    slides.push(div);
+    currentSlide = div;
+    slideNum += 1;
 
-    var previousFormation = currentSlide; //copy of previous formation
+    /*var previousFormation = currentSlide; //copy of previous formation
     var transition = previousFormation.cloneNode(true);
     transition.style.display = "block";
     div.appendChild(transition);
@@ -170,7 +179,7 @@ function makeNewSlide(){
 
     document.getElementById("content").appendChild(div);
     slides.push(div);
-    currentSlide = div;
+    currentSlide = div;*/
 });
 
 $('#next-btn').click(function(e){
