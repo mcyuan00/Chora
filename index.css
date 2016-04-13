@@ -223,3 +223,6 @@ content: "\f101";
     margin-bottom: 10px;
 
 }
+td {
+    vertical-align: middle;
+}
