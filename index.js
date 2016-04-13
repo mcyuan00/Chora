@@ -1,6 +1,17 @@
 $(document).ready(function() {  
-  $.justwave({ showname: 0});
-    
+  var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: 'violet',
+      progressColor: 'purple', 
+      height: 75
+  });
+  wavesurfer.load('./Roses.mp3');
+
+  var playButton = document.getElementById("play");
+  playButton.onclick=function(){
+    wavesurfer.playPause();
+  }
+
   var slides = [], currentSlide = null; slideNum = 0, chosen = new Array(), x = 0, y = 0;
 
 
