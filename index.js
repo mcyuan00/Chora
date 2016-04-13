@@ -182,6 +182,19 @@ function makeNewSlide(){
     currentSlide = div;*/
 });
 
+$(".formation").click(function(e){
+  var formation = e.target.cloneNode(true);
+
+  formation.style.width = "100%";
+  formation.style.height = "100%";
+  formation.style.position = "absolute";
+  formation.style.left = "0";
+  formation.style.top = "0";
+  formation.style.display = "block";
+  formation.style.zIndex = "20";
+  currentSlide.appendChild(formation);
+})
+
 $('#next-btn').click(function(e){
   if (slideNum < slides.length){
     currentSlide.style.display = "none";
