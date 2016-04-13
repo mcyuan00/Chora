@@ -125,38 +125,25 @@ function makeNewSlide(){
 });
 
 $('#next-btn').click(function(e){
-  console.log(currentSlide.childNodes);
-  if (slideNum < slides.length -1){
-    currentSlide.style.zIndex = '10';
-    for (var i in currentSlide.childNodes){
-      currentSlide.childNodes[i].style.zIndex = '10';
-    }
+  if (slideNum < slides.length){
+    currentSlide.style.display = "none";
     
     slideNum = slideNum + 1;
-    currentSlide = slides[slideNum];
-    currentSlide.style.zIndex = '20';
-    for (var i in currentSlide.childNodes){
-      currentSlide.childNodes[i].style.zIndex = '20';
-    }
+    currentSlide = slides[slideNum - 1];
+    currentSlide.style.display = 'block';
+    
     console.log(slideNum);
   }
 });
 
 $('#previous-btn').click(function(e){
-  if (slideNum > 0){
-    currentSlide.style.zIndex = '10';
-    console.log(currentSlide.childNodes);
-    for (var i in currentSlide.childNodes){
-      console.log(currentSlide.childNodes[i]);
-      currentSlide.childNodes[i].style.zIndex = '10';
-    }
+  if (slideNum > 1){
+    currentSlide.style.display = 'none';
+    
     slideNum = slideNum - 1;
-    currentSlide = slides[slideNum];
-    currentSlide.style.zIndex = '20';
-    console.log(currentSlide.childNodes);
-    for (var i in currentSlide.childNodes){
-      currentSlide.childNodes[i].style.zIndex = '20';
-    }
+    currentSlide = slides[slideNum - 1];
+    currentSlide.style.display = "block";
+
     console.log(slideNum);
   }
 });
@@ -184,6 +171,7 @@ function OnMouseDown(e){
     offsetX = ExtractNumber(target.style.left);
     offsetY = ExtractNumber(target.style.top);
     dragElement = target.cloneNode(true);
+    console.log(dragElement);
 
     oldZ = target.style.zIndex;
     dragElement.style.zIndex = 1000;
@@ -217,8 +205,9 @@ function ExtractNumber(value){
 function OnMouseUp(e){
   if (dragElement != null){
     dragElement.style.zIndex = oldZ;
+    console.log(e.target.parentNode.id);
 
-    if (e.target.parentNode.id == "content"){
+    if (e.target.parentNode.id === "content"){
 
       var formation = dragElement;
 
@@ -229,7 +218,7 @@ function OnMouseUp(e){
       formation.style.top = "0";
       formation.style.display = "block";
       formation.style.zIndex = "20";
-      slides[slideNum].appendChild(formation);
+      currentSlide.appendChild(formation);
     }
 
     document.onmousemove = null;
