@@ -91,7 +91,6 @@ function makeNewSlide(){
   var div = document.createElement("div");
   div.style.width = "100%";
   div.style.height = "100%";
-  div.style.border = "1px solid black";
   document.getElementById('content').appendChild(div);
   slides.push(div);
   currentSlide = div;
