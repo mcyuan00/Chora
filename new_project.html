@@ -1,0 +1,67 @@
+<html>
+  <head>
+     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- <script src="login.js"></script> -->
+    <link rel="stylesheet" href="new_project.css" />
+  </head>
+
+  <body>
+    <div id = "header" class = "row">
+      <div class = "col-md-3"></div>
+      <div class = "col-md-8">
+        <p id="page_title">New Project</p>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div id = "form_part1" class = "form col-md-6">
+        <form>
+          <fieldset class="form-group">
+            <label for="projectTitle">Project Title</label>
+            <input type="text" class="form-control" id="projectTitle" placeholder="Enter project title">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="numDancers">Number of Dancers</label>
+            <input type="number" class="form-control" id="numDancers">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="music">Music</label>
+            <input type="file" class="form-control-file" id="music">
+            <small class="text-muted">MP3 files preferred!</small>
+          </fieldset>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div id = "header" class = "row">
+      <div class = "col-md-3"></div>
+      <div class = "col-md-8">
+        <p id="page_title">Dancer Info</p>
+      </div>
+    </div>
+
+
+    <div class = "row">
+      <div id = "dancerInfo" class = "form col-md-6">
+        <form>
+           <fieldset class="form-group">
+            <label for="dancerName">Dancer Name</label>
+            <input type="text" class="form-control" id="dancerName" placeholder="First, Last">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="dancerNotes">Dancer Notes</label>
+            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
