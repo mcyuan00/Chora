@@ -123,7 +123,7 @@ function createDancer (dancerName) {
   dancer.style.float = "left";
   dancer.style.marginRight = "10px";
   var name = document.createElement("div");
-  name.className = "dance";
+  name.className = "dancer_name";
   name.innerHTML = dancerName; name.style.position = "absolute"; name.style.top = "50%"; 
   name.style.left = "50%"; name.style.transform = "translate(-50%, -50%)";
   name.style.color = "white";
@@ -233,91 +233,6 @@ $('#previous-btn').click(function(e){
     console.log(slideNum);
   }
 });
-
-/*
-function DragDrop(){
-  document.onmousedown = OnMouseDown;
-  document.onmouseup = OnMouseUp;
-}
-
-var startX;
-var startY;
-var offsetX;
-var offsetY;
-var oldZ;
-var dragElement
-
-function OnMouseDown(e){
-  e = e || window.event;
-
-  var target = e.target || e.srcElement;
-
-  if (target.type == "image" && target.className == "formation"){
-    startX = e.clientX;
-    startY = e.clientY;
-    offsetX = ExtractNumber(target.style.left);
-    offsetY = ExtractNumber(target.style.top);
-    dragElement = target.cloneNode(true);
-    console.log(dragElement);
-
-    oldZ = target.style.zIndex;
-    dragElement.style.zIndex = 1000;
-
-    
-
-    document.onmousemove = OnMouseMove;
-    document.body.focus();
-
-    document.onselectstart = function () {return false;};
-    target.ondragstart = function() {return false;};
-
-    return false;
-  }
-
-}
-
-function OnMouseMove(e){
-  e = e || window.event;
-
-  dragElement.style.left = e.clientX + 'px';
-  dragElement.style.top = e.clientY + 'px';
-
-}
-
-function ExtractNumber(value){
-  var n = parseInt(value)
-  return n == null || isNaN(n) ? 0 : n;
-}
-
-function OnMouseUp(e){
-  if (dragElement != null){
-    dragElement.style.zIndex = oldZ;
-    console.log(e.target.parentNode.id);
-
-    if (e.target.parentNode.id === "content"){
-
-      var formation = dragElement;
-
-      formation.style.width = "100%";
-      formation.style.height = "100%";
-      formation.style.position = "absolute";
-      formation.style.left = "0";
-      formation.style.top = "0";
-      formation.style.display = "block";
-      formation.style.zIndex = "20";
-      currentSlide.appendChild(formation);
-    }
-
-    document.onmousemove = null;
-    document.onselectstart = null;
-    dragElement.ondragstart = null;
-
-    dragElement = null;
-  }
-}
-
-DragDrop();
-*/
 });
 
 
