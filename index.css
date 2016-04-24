@@ -74,6 +74,19 @@ canvas {
   z-index: 20;
 	transform: translate(-50%, -50%);
 }
+.body #next-btn{
+  position: absolute;
+  left: 75%; top: 50%;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+}
+
+.body #previous-btn{
+  position: absolute;
+  left: 25%; top: 50%;
+  z-index: 20;
+  transform: translate(-50%, -50%);
+}
 
 .body #waveform{
   width: 80%; height: 75px;
