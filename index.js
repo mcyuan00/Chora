@@ -17,6 +17,7 @@ $(document).ready(function() {
 var selected = null, // Object of the element to be moved
     x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
     x_elem = 0, y_elem = 0; // Stores top, left values (edge) of the element
+    x_pos_original = 0, y_pos_original = 0; //position to return to if out of bounds
 
 // Will be called when user starts dragging an element
 function _drag_init(elem) {
@@ -24,6 +25,8 @@ function _drag_init(elem) {
     selected = elem;
     x_elem = x_pos - selected.offsetLeft;
     y_elem = y_pos - selected.offsetTop;
+    x_pos_original = selected.style.left;
+    y_pos_original = selected.style.top;
 }
 
 // Will be called when user dragging an element
@@ -38,6 +41,18 @@ function _move_elem(e) {
 
 // Destroy the object when we are done
 function _destroy() {
+    if( selected !== null ){
+      selected_left = parseInt(selected.style.left, 10);
+      selected_width = parseInt(selected.style.width, 10);
+      selected_top = parseInt(selected.style.top, 10);
+      if( selected_left < selected_width/2 ||
+          selected_left > $('#content').width() - selected_width/2 ||
+          selected_top < selected_width/2 ||
+          selected_top > $('#content').height() - selected_width/2) {
+        selected.style.left = x_pos_original;
+        selected.style.top = y_pos_original;
+      }
+    }
     selected = null;
 }
 
