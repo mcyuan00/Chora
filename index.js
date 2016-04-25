@@ -81,7 +81,6 @@ document.onmousemove = _move_elem;
   });
 
   $('#menu').mouseover(function(e){
-    console.log(e.target.className);
     if (e.target.className == "dance") {
       document.getElementById("menu").style.cursor = "pointer";
     } else {
@@ -96,10 +95,11 @@ document.onmousemove = _move_elem;
       var dancerFinal = createDancer(e.target.innerHTML);
       dancerFinal.className = "placed";
       currentSlide.appendChild(dancerFinal);
-      dancerFinal.style.left = x + "px"; dancerFinal.style.top = y + "px";
+      dancerFinal.style.left = x-25 + "px"; dancerFinal.style.top = y-25 + "px";
       dancerFinal.style.position = "absolute";
-    }
-    document.getElementById("menu").style.display = "none";
+      document.getElementById("menu").style.display = "none";
+      placeDancer.style.display = "none";
+    };
   });
 
 //initializing single slide in slides 
@@ -133,6 +133,7 @@ function createDancer (dancerName) {
 }
 
 $('#newFormation').click(makeNewSlide);
+
 function makeNewSlide(){
   chosen = new Array()
   document.getElementById('menu').style.display = "none";
@@ -148,6 +149,10 @@ function makeNewSlide(){
   slides.push(div);
   currentSlide = div;
   slideNum += 1;
+  $('#menu').children().each( function() {
+    this.style.display = "initial";
+  }
+    )
 }
 
  $('#newTransition').click(function(e){
@@ -246,11 +251,13 @@ var onClick = function () {
     body.className = 'body minimized';
     angle.className = 'angle icon-double-angle-right';
     $('.tab-content').hide();
+    wavesurfer.drawer.containerWidth = body.width;
   } else {
     sidebar.className = 'sidebar maximized';
     body.className = 'body';
     angle.className = 'angle icon-double-angle-left';
     $('.tab-content').show();
+    wavesurfer.drawer.containerWidth = body.width;
   }
   return false;
 };
