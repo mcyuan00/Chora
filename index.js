@@ -3,7 +3,10 @@ $(document).ready(function() {
       container: '#waveform',
       waveColor: '#7addcd',
       progressColor: '#459cb6', 
-      height: 75
+      pixelRatio: 1,
+      height: 75,
+      fillParent: true,
+      barWidth:2
   });
   wavesurfer.load('./Roses.mp3');
 
@@ -39,6 +42,8 @@ function _move_elem(e) {
     }
 }
 
+var wasDragged = false;
+
 // Destroy the object when we are done
 function _destroy() {
     if( selected !== null ){
@@ -51,6 +56,11 @@ function _destroy() {
           selected_top > $('#content').height() - selected_width/2) {
         selected.style.left = x_pos_original;
         selected.style.top = y_pos_original;
+        wasDragged = true;
+      } else if (selected.style.left !== x_pos_original || selected.style.top !== y_pos_original) {
+        wasDragged = true;
+      } else {
+        wasDragged = false;
       }
     }
     selected = null;
@@ -58,7 +68,8 @@ function _destroy() {
 
 // Bind the functions...
 document.onmousedown = function (e) {
-    if(e.target.className == "placed"){
+    if(e.target.className == "placed" || e.target.className == "emptyDancer"){
+      console.log(e.target.className);
       _drag_init(e.target);
       return false;
   }
@@ -66,19 +77,40 @@ document.onmousedown = function (e) {
 
 document.onmousemove = _move_elem;
 
+var currentDancer = null;
+
   $(document).mouseup(function(event) {
     _destroy();
     if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") && document.getElementById('menu').style.display != "inline-block"){
+      var emptyDancer = createEmptyDancer();
       x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
+      emptyDancer.style.left = x + "px"; emptyDancer.style.top = y + "px";
+      emptyDancer.style.transform = "translate(-50%, -50%)";
+      emptyDancer.style.position = "absolute";
+      currentSlide.appendChild(emptyDancer);
+    } else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
       document.getElementById('menu').style.display = "inline-block";
       document.getElementById('menu').style.position = "relative";
-      document.getElementById('menu').style.left = x+"px";
-      document.getElementById('menu').style.top = y + "px";
-      document.getElementById('menu').style.transform = "translate(-50%, -100%)";
+      document.getElementById('menu').style.left = event.target.style.left;
+      document.getElementById('menu').style.top = event.target.style.top;
+      document.getElementById('menu').style.transform = "translate(-50%, -175%)";
+
+
+
+
+      //document.getElementById('trash').style.display = "visible";
+      //document.getElementById('trash').style.position = "relative";
+      //document.getElementById('trash').style.left = event.target.style.left;
+      //document.getElementById('trash').style.top = event.target.style.top;
+      //document.getElementById('trash').style.transform = "translate(-50%, 150%)";
+      currentDancer = event.target;
     } else {
-      document.getElementById('menu').style.display = "none";
+        document.getElementById('menu').style.display = "none";
     }
+    wasDragged = false;
   });
+
+
 
   $('#menu').mouseover(function(e){
     if (e.target.className == "dance") {
@@ -90,16 +122,28 @@ document.onmousemove = _move_elem;
   });
   $('#menu').click(function(e){
     var placeDancer = e.target;
-    if (!(placeDancer.textContent in chosen) && placeDancer.textContent.length ==2) {
-      chosen[e.target.textContent] = 0;
+    if ( placeDancer.textContent.length ==2) {
       var dancerFinal = createDancer(e.target.innerHTML);
       dancerFinal.className = "placed";
       currentSlide.appendChild(dancerFinal);
-      dancerFinal.style.left = x-25 + "px"; dancerFinal.style.top = y-25 + "px";
+      dancerFinal.style.left = currentDancer.style.left; dancerFinal.style.top = currentDancer.style.top;
+      dancerFinal.style.transform = "translate(-50%, -50%)";
+      currentSlide.removeChild(currentDancer);
+      if(currentDancer.className == "placed"){
+        var nameVisible = currentDancer.children[0].children[0].innerHTML;
+        console.log(nameVisible);
+        $('#menu').children().each( function() {
+          //console.log(this.children[0].innerHTML);
+          if( this.children[0].innerHTML == nameVisible){
+            this.style.display = "initial";
+          };
+        });
+      }
+      currentDancer = null;
       dancerFinal.style.position = "absolute";
       document.getElementById("menu").style.display = "none";
       placeDancer.style.display = "none";
-    };
+    } 
   });
 
 //initializing single slide in slides 
@@ -119,7 +163,7 @@ function createDancer (dancerName) {
   dancer.style.width = "50px"; dancer.style.height = "50px";
   dancer.style.position = "relative";
   dancer.style.borderRadius = "50%";
-  dancer.style.background = "blue";
+  dancer.style.background = "#7addcd";
   dancer.style.float = "left";
   dancer.style.marginRight = "10px";
   var name = document.createElement("div");
@@ -130,6 +174,15 @@ function createDancer (dancerName) {
   dancer.appendChild(name);
   dancer.className = "dance";
   return dancer;
+}
+
+function createEmptyDancer() {
+  var emptyDancer = document.createElement("div");
+  emptyDancer.style.width = "50px"; emptyDancer.style.height = "50px";
+  emptyDancer.style.borderRadius = "50%";
+  emptyDancer.style.background = "#d9d8ba";
+  emptyDancer.className = "emptyDancer";
+  return emptyDancer;
 }
 
 $('#newFormation').click(makeNewSlide);
@@ -241,7 +294,7 @@ $('#previous-btn').click(function(e){
 });
 
 
-var onClick = function () {
+function onClick() {
   var sidebar = document.querySelector('.sidebar');
   var body = document.querySelector('.body');
   var angle = document.querySelector('.angle');
@@ -251,13 +304,15 @@ var onClick = function () {
     body.className = 'body minimized';
     angle.className = 'angle icon-double-angle-right';
     $('.tab-content').hide();
-    wavesurfer.drawer.containerWidth = body.width;
+    //$('#waveform').width($(window).width() - 50);
+    //console.log($(window).width() - 50);
   } else {
     sidebar.className = 'sidebar maximized';
     body.className = 'body';
     angle.className = 'angle icon-double-angle-left';
     $('.tab-content').show();
-    wavesurfer.drawer.containerWidth = body.width;
+    //$('#waveform').width($(window).width() - 250);
+    //console.log($(window).width() - 250);
   }
   return false;
 };
