@@ -98,14 +98,15 @@ var currentDancer = null;
 
 
 
-      //document.getElementById('trash').style.display = "visible";
-      //document.getElementById('trash').style.position = "relative";
-      //document.getElementById('trash').style.left = event.target.style.left;
-      //document.getElementById('trash').style.top = event.target.style.top;
-      //document.getElementById('trash').style.transform = "translate(-50%, 150%)";
+      document.getElementById('trash').style.display = "initial";
+      document.getElementById('trash').style.position = "absolute";
+      document.getElementById('trash').style.left = event.target.style.left;
+      document.getElementById('trash').style.top = event.target.style.top;
+      document.getElementById('trash').style.transform = "translate(-50%, 175%)";
       currentDancer = event.target;
     } else {
         document.getElementById('menu').style.display = "none";
+        document.getElementById('trash').style.display = "none";
     }
     wasDragged = false;
   });
@@ -131,9 +132,7 @@ var currentDancer = null;
       currentSlide.removeChild(currentDancer);
       if(currentDancer.className == "placed"){
         var nameVisible = currentDancer.children[0].children[0].innerHTML;
-        console.log(nameVisible);
         $('#menu').children().each( function() {
-          //console.log(this.children[0].innerHTML);
           if( this.children[0].innerHTML == nameVisible){
             this.style.display = "initial";
           };
@@ -145,6 +144,18 @@ var currentDancer = null;
       placeDancer.style.display = "none";
     } 
   });
+
+  $('#trash').click( function(e){
+    currentSlide.removeChild(currentDancer);
+    if(currentDancer.className == "placed"){
+        var nameVisible = currentDancer.children[0].children[0].innerHTML;
+        $('#menu').children().each( function() {
+          if( this.children[0].innerHTML == nameVisible){
+            this.style.display = "initial";
+          };
+        });
+      }
+  })
 
 //initializing single slide in slides 
 //var currentSlide = document.createElement("div");
@@ -180,7 +191,8 @@ function createEmptyDancer() {
   var emptyDancer = document.createElement("div");
   emptyDancer.style.width = "50px"; emptyDancer.style.height = "50px";
   emptyDancer.style.borderRadius = "50%";
-  emptyDancer.style.background = "#d9d8ba";
+  emptyDancer.style.background = "#7addcd";
+  emptyDancer.style.opacity = "0.3";
   emptyDancer.className = "emptyDancer";
   return emptyDancer;
 }
@@ -292,6 +304,7 @@ $('#previous-btn').click(function(e){
   }
 });
 });
+
 
 
 function onClick() {

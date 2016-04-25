@@ -4,6 +4,11 @@
 canvas {
   pointer-events: none;
 }
+
+.glyphicon.glyphicon-trash {
+    font-size: 25px;
+}
+
 #add {
   position: absolute;
   top: 11%; left: 50%;
