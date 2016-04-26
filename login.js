@@ -1,7 +1,14 @@
 $document.ready.function{
+}
 
-  "#signin_btn".onclick(function(e){
-    location.href = window.location.href.replace("login.html", "index.html");
-  });
-
+function validateForm() {
+    var email = document.forms["signin"]["email"].value;
+    var password = document.forms["signin"]["password"].value;
+    if (email == "chora@gmail.com" && password == "abc") {
+        return true;
+    }
+    else{
+      alert("wrong username/ password");
+      return false;
+    }
 }

@@ -7,7 +7,7 @@ body{
 }
 
 
-#page_title {
+.page_title {
   font-family: 'Amatic SC', cursive;
   font-size: 55pt;
   text-align: center;
@@ -22,14 +22,19 @@ body{
   left: 25%;
 }
 
+.name{
+  width: 300px;
+}
+
+.input{
+  margin-bottom: 20px;
+}
+
+#audiofield{
+  padding-bottom: 20px;
+}
+
 #numDancers{
   width: 75px;
 }
 
-#dancerName{
-  width: 300px;
-}
-
-#dancerNotes{
-  height: 50px;
-}
