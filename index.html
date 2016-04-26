@@ -73,8 +73,31 @@
                     <h2>Settings</h2>
                     <form>
                         <fieldset class="form-group">
-                        <label for="danceTitle">Dance Title</label>
-                        <input type="title" class="form-control" id="danceTitle" placeholder="Title">
+                            <label for="danceTitle">Dance Title</label>
+                            <input type="title" class="form-control" id="danceTitle" placeholder="Title" readonly>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="numDancers">Number of Dancers</label>
+                            <select class="form-control" id="numDancers" disabled>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                            </select>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" rows="3" readonly></textarea>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="music">Music Upload</label>
+                            <input type="file" class="form-control-file" id="music" readonly>
+                            <small id = "currentMusic" class="text-muted">Current: Roses.mp3</small>
                         </fieldset>
 
                     </form>
