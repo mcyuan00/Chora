@@ -3,7 +3,10 @@ $(document).ready(function() {
       container: '#waveform',
       waveColor: '#7addcd',
       progressColor: '#459cb6', 
-      height: 75
+      pixelRatio: 1,
+      height: 75,
+      fillParent: true,
+      barWidth:2
   });
   wavesurfer.load('./Roses.mp3');
 
@@ -17,13 +20,17 @@ $(document).ready(function() {
 var selected = null, // Object of the element to be moved
     x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
     x_elem = 0, y_elem = 0; // Stores top, left values (edge) of the element
+    x_pos_original = 0, y_pos_original = 0; //position to return to if out of bounds
 
 // Will be called when user starts dragging an element
 function _drag_init(elem) {
     // Store the object of the element which needs to be moved
     selected = elem;
+    selected.style.zIndex = 25;
     x_elem = x_pos - selected.offsetLeft;
     y_elem = y_pos - selected.offsetTop;
+    x_pos_original = selected.style.left;
+    y_pos_original = selected.style.top;
 }
 
 // Will be called when user dragging an element
@@ -36,14 +43,35 @@ function _move_elem(e) {
     }
 }
 
+var wasDragged = false;
+
 // Destroy the object when we are done
 function _destroy() {
+    if( selected !== null ){
+      selected.style.zIndex = "initial";
+      selected_left = parseInt(selected.style.left, 10);
+      selected_width = parseInt(selected.style.width, 10);
+      selected_top = parseInt(selected.style.top, 10);
+      if( selected_left < selected_width/2 ||
+          selected_left > $('#content').width() - selected_width/2 ||
+          selected_top < selected_width/2 ||
+          selected_top > $('#content').height() - selected_width/2) {
+        selected.style.left = x_pos_original;
+        selected.style.top = y_pos_original;
+        wasDragged = true;
+      } else if (selected.style.left !== x_pos_original || selected.style.top !== y_pos_original) {
+        wasDragged = true;
+      } else {
+        wasDragged = false;
+      }
+    }
     selected = null;
 }
 
 // Bind the functions...
 document.onmousedown = function (e) {
-    if(e.target.className == "placed"){
+    if(e.target.className == "placed" || e.target.className == "emptyDancer"){
+      console.log(e.target.className);
       _drag_init(e.target);
       return false;
   }
@@ -51,22 +79,61 @@ document.onmousedown = function (e) {
 
 document.onmousemove = _move_elem;
 
+var currentDancer = null;
+var menuOpen = false; 
+
   $(document).mouseup(function(event) {
     _destroy();
     if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") && document.getElementById('menu').style.display != "inline-block"){
+      var emptyDancer = createEmptyDancer();
       x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
-      document.getElementById('menu').style.display = "inline-block";
-      document.getElementById('menu').style.position = "relative";
-      document.getElementById('menu').style.left = x+"px";
-      document.getElementById('menu').style.top = y + "px";
-      document.getElementById('menu').style.transform = "translate(-50%, -100%)";
-    } else {
+      emptyDancer.style.left = x + "px"; emptyDancer.style.top = y + "px";
+      emptyDancer.style.transform = "translate(-50%, -50%)";
+      emptyDancer.style.position = "absolute";
+      currentSlide.appendChild(emptyDancer);
       document.getElementById('menu').style.display = "none";
+      document.getElementById('trash').style.display = "none";
+      document.getElementById('colorMenu').style.display = "none";
+      menuOpen = false;
+    } else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
+      if (!menuOpen){
+        document.getElementById('colorMenu').style.display = "none";
+        document.getElementById('menu').style.display = "inline-block";
+        document.getElementById('menu').style.position = "relative";
+        document.getElementById('menu').style.left = event.target.style.left;
+        document.getElementById('menu').style.top = event.target.style.top;
+        document.getElementById('menu').style.transform = "translate(-50%, -175%)";
+
+        document.getElementById('trash').style.display = "initial";
+        document.getElementById('trash').style.position = "absolute";
+        document.getElementById('trash').style.left = event.target.style.left;
+        document.getElementById('trash').style.top = event.target.style.top;
+        document.getElementById('trash').style.transform = "translate(-50%, 175%)";
+        currentDancer = event.target;
+        menuOpen = true;
+      } else {
+        document.getElementById('menu').style.display = "none";
+        document.getElementById('trash').style.display = "none";
+        menuOpen = false;
+        document.getElementById('colorMenu').style.display = "inline-block";
+        document.getElementById('colorMenu').style.position = "relative";
+        document.getElementById('colorMenu').style.left = event.target.style.left;
+        document.getElementById('colorMenu').style.top = event.target.style.top;
+        document.getElementById('colorMenu').style.transform = "translate(-50%, -175%)";
+
+      }
+    } else {
+        document.getElementById('menu').style.display = "none";
+        document.getElementById('trash').style.display = "none";
+        document.getElementById('colorMenu').style.display = "none";
+        menuOpen = false;
     }
+    wasDragged = false;
   });
 
+
+
   $('#menu').mouseover(function(e){
-    console.log(e.target.className);
     if (e.target.className == "dance") {
       document.getElementById("menu").style.cursor = "pointer";
     } else {
@@ -76,16 +143,47 @@ document.onmousemove = _move_elem;
   });
   $('#menu').click(function(e){
     var placeDancer = e.target;
-    if (!(placeDancer.textContent in chosen) && placeDancer.textContent.length ==2) {
-      chosen[e.target.textContent] = 0;
+    if ( placeDancer.textContent.length ==2) {
       var dancerFinal = createDancer(e.target.innerHTML);
       dancerFinal.className = "placed";
       currentSlide.appendChild(dancerFinal);
-      dancerFinal.style.left = x + "px"; dancerFinal.style.top = y + "px";
+      dancerFinal.style.left = currentDancer.style.left; dancerFinal.style.top = currentDancer.style.top;
+      dancerFinal.style.transform = "translate(-50%, -50%)";
+      dancerFinal.style.background = currentDancer.style.background;
+      currentSlide.removeChild(currentDancer);
+      if(currentDancer.className == "placed"){
+        var nameVisible = currentDancer.children[0].children[0].innerHTML;
+        $('#menu').children().each( function() {
+          if( this.children[0].innerHTML == nameVisible){
+            this.style.display = "initial";
+          };
+        });
+      }
+      currentDancer = null;
       dancerFinal.style.position = "absolute";
-    }
-    document.getElementById("menu").style.display = "none";
+      document.getElementById("menu").style.display = "none";
+      placeDancer.style.display = "none";
+    } 
   });
+
+  $('#colorMenu').click(function(e){
+    var selectedColor = e.target;
+    if (currentDancer.className == "placed"){
+      currentDancer.style.background = selectedColor.style.background;
+    }
+  });
+
+  $('#trash').click( function(e){
+    currentSlide.removeChild(currentDancer);
+    if(currentDancer.className == "placed"){
+        var nameVisible = currentDancer.children[0].children[0].innerHTML;
+        $('#menu').children().each( function() {
+          if( this.children[0].innerHTML == nameVisible){
+            this.style.display = "initial";
+          };
+        });
+      }
+  })
 
 //initializing single slide in slides 
 //var currentSlide = document.createElement("div");
@@ -99,16 +197,23 @@ document.getElementById('menu').appendChild(createDancer("SS"));
 document.getElementById('menu').appendChild(createDancer("HU"));
 document.getElementById('menu').appendChild(createDancer("BO"));
 
+document.getElementById('colorMenu').appendChild(createColorSelection('#bff0e7'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#7addcd'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#459cb6'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#f99186'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#fec35b'));
+
+
 function createDancer (dancerName) {
   var dancer = document.createElement("div");
   dancer.style.width = "50px"; dancer.style.height = "50px";
   dancer.style.position = "relative";
   dancer.style.borderRadius = "50%";
-  dancer.style.background = "blue";
+  dancer.style.background = "#7addcd";
   dancer.style.float = "left";
   dancer.style.marginRight = "10px";
   var name = document.createElement("div");
-  name.className = "dance";
+  name.className = "dancer_name";
   name.innerHTML = dancerName; name.style.position = "absolute"; name.style.top = "50%"; 
   name.style.left = "50%"; name.style.transform = "translate(-50%, -50%)";
   name.style.color = "white";
@@ -117,7 +222,29 @@ function createDancer (dancerName) {
   return dancer;
 }
 
+function createEmptyDancer() {
+  var emptyDancer = document.createElement("div");
+  emptyDancer.style.width = "50px"; emptyDancer.style.height = "50px";
+  emptyDancer.style.borderRadius = "50%";
+  emptyDancer.style.background = "#7addcd";
+  emptyDancer.style.opacity = "0.3";
+  emptyDancer.className = "emptyDancer";
+  return emptyDancer;
+}
+
+function createColorSelection(hex) {
+  var color = document.createElement("div");
+  color.style.width = "50px"; color.style.height = "50px";
+  color.style.borderRadius = "50%";
+  color.style.background = hex;
+  color.style.border = "thin solid gray";
+  color.style.float = "left";
+  color.style.marginRight = "10px";
+  return color;
+}
+
 $('#newFormation').click(makeNewSlide);
+
 function makeNewSlide(){
   chosen = new Array()
   document.getElementById('menu').style.display = "none";
@@ -133,6 +260,10 @@ function makeNewSlide(){
   slides.push(div);
   currentSlide = div;
   slideNum += 1;
+  $('#menu').children().each( function() {
+    this.style.display = "initial";
+  }
+    )
 }
 
  $('#newTransition').click(function(e){
@@ -218,95 +349,11 @@ $('#previous-btn').click(function(e){
     console.log(slideNum);
   }
 });
-
-/*
-function DragDrop(){
-  document.onmousedown = OnMouseDown;
-  document.onmouseup = OnMouseUp;
-}
-
-var startX;
-var startY;
-var offsetX;
-var offsetY;
-var oldZ;
-var dragElement
-
-function OnMouseDown(e){
-  e = e || window.event;
-
-  var target = e.target || e.srcElement;
-
-  if (target.type == "image" && target.className == "formation"){
-    startX = e.clientX;
-    startY = e.clientY;
-    offsetX = ExtractNumber(target.style.left);
-    offsetY = ExtractNumber(target.style.top);
-    dragElement = target.cloneNode(true);
-    console.log(dragElement);
-
-    oldZ = target.style.zIndex;
-    dragElement.style.zIndex = 1000;
-
-    
-
-    document.onmousemove = OnMouseMove;
-    document.body.focus();
-
-    document.onselectstart = function () {return false;};
-    target.ondragstart = function() {return false;};
-
-    return false;
-  }
-
-}
-
-function OnMouseMove(e){
-  e = e || window.event;
-
-  dragElement.style.left = e.clientX + 'px';
-  dragElement.style.top = e.clientY + 'px';
-
-}
-
-function ExtractNumber(value){
-  var n = parseInt(value)
-  return n == null || isNaN(n) ? 0 : n;
-}
-
-function OnMouseUp(e){
-  if (dragElement != null){
-    dragElement.style.zIndex = oldZ;
-    console.log(e.target.parentNode.id);
-
-    if (e.target.parentNode.id === "content"){
-
-      var formation = dragElement;
-
-      formation.style.width = "100%";
-      formation.style.height = "100%";
-      formation.style.position = "absolute";
-      formation.style.left = "0";
-      formation.style.top = "0";
-      formation.style.display = "block";
-      formation.style.zIndex = "20";
-      currentSlide.appendChild(formation);
-    }
-
-    document.onmousemove = null;
-    document.onselectstart = null;
-    dragElement.ondragstart = null;
-
-    dragElement = null;
-  }
-}
-
-DragDrop();
-*/
 });
 
 
-var onClick = function () {
+
+function onClick() {
   var sidebar = document.querySelector('.sidebar');
   var body = document.querySelector('.body');
   var angle = document.querySelector('.angle');
@@ -316,11 +363,15 @@ var onClick = function () {
     body.className = 'body minimized';
     angle.className = 'angle icon-double-angle-right';
     $('.tab-content').hide();
+    //$('#waveform').width($(window).width() - 50);
+    //console.log($(window).width() - 50);
   } else {
     sidebar.className = 'sidebar maximized';
     body.className = 'body';
     angle.className = 'angle icon-double-angle-left';
     $('.tab-content').show();
+    //$('#waveform').width($(window).width() - 250);
+    //console.log($(window).width() - 250);
   }
   return false;
 };

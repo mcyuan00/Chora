@@ -1,9 +1,23 @@
-#menu {
+#menu, #trash, #colorMenu {
   display: none;
+  z-index: 25;
 }
 canvas {
   pointer-events: none;
 }
+
+.glyphicon{
+  font-size: 20px;
+}
+.glyphicon.glyphicon-trash {
+  font-size: 25px;
+}
+
+.footer{
+  position: absolute;
+  text-align: center;
+}
+
 #add {
   position: absolute;
   top: 11%; left: 50%;
@@ -11,6 +25,32 @@ canvas {
   text-align: center;
   z-index: 50;
 }
+
+#newFormation, #newTransition{
+  font-family: 'Amatic SC', cursive;
+  font-size: 20px;
+  background: #459cb6;
+  border: none;
+  color: #ffffff;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  width: 100px;
+
+}
+
+
+#play{
+  font-family: 'Amatic SC', cursive;
+  font-size: 20px;
+  background: #459cb6;
+  border: none;
+  color: #ffffff;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  width: 100px;
+  text-align: center;
+}
+
 #add ul,
 #add ul li,
 #add ul ul {
@@ -54,17 +94,16 @@ canvas {
 #add ul ul li {
   font-weight: normal;
 }
-#newFormation, #newTransition {
-  background: #459cb6;
-  border: none;
-  color: #ffffff;
-  font-size: 14pt; 
-  margin-left: 10px;
-  margin-bottom: 5px;
-  width: 100px;
 
+.dancer_name{
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: default;
+  pointer-events: none;
 }
-
 .body #content{
 	border: .25px dotted #454439;
 	background-color: #FFFFFF;
@@ -143,7 +182,7 @@ canvas {
   font-family: 'Amatic SC', cursive;
   font-size: 55pt;
   margin: 0; padding: 0;
-  color: rgb(122,200,275);
+  color: #7addcd;
   padding-left: 35px; padding-top: 8px;
 }
 
