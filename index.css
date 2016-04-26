@@ -1,5 +1,6 @@
 #menu, #trash, #colorMenu {
   display: none;
+  z-index: 25;
 }
 canvas {
   pointer-events: none;

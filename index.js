@@ -26,6 +26,7 @@ var selected = null, // Object of the element to be moved
 function _drag_init(elem) {
     // Store the object of the element which needs to be moved
     selected = elem;
+    selected.style.zIndex = 25;
     x_elem = x_pos - selected.offsetLeft;
     y_elem = y_pos - selected.offsetTop;
     x_pos_original = selected.style.left;
@@ -47,6 +48,7 @@ var wasDragged = false;
 // Destroy the object when we are done
 function _destroy() {
     if( selected !== null ){
+      selected.style.zIndex = "initial";
       selected_left = parseInt(selected.style.left, 10);
       selected_width = parseInt(selected.style.width, 10);
       selected_top = parseInt(selected.style.top, 10);
@@ -147,6 +149,7 @@ var menuOpen = false;
       currentSlide.appendChild(dancerFinal);
       dancerFinal.style.left = currentDancer.style.left; dancerFinal.style.top = currentDancer.style.top;
       dancerFinal.style.transform = "translate(-50%, -50%)";
+      dancerFinal.style.background = currentDancer.style.background;
       currentSlide.removeChild(currentDancer);
       if(currentDancer.className == "placed"){
         var nameVisible = currentDancer.children[0].children[0].innerHTML;
