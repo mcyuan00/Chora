@@ -9,6 +9,7 @@ $(document).ready(function() {
       barWidth:2
   });
   wavesurfer.load('./Roses.mp3');
+  
 
   var playButton = document.getElementById("play");
   playButton.onclick=function(){
@@ -370,33 +371,33 @@ $('#editButton').on('click', function(){
   }
 });
 
-
-
-}); //end of document ready 
-
-
-function onClick() {
+$('#sidebar-toggle').click(function() {
   var sidebar = document.querySelector('.sidebar');
   var body = document.querySelector('.body');
   var angle = document.querySelector('.angle');
+  var progressRatio = 0;
   var classNames = document.querySelector('.sidebar').className;
   if(classNames.indexOf('maximized') > -1) {
     sidebar.className = 'sidebar';
     body.className = 'body minimized';
     angle.className = 'angle icon-double-angle-right';
     $('.tab-content').hide();
-    //$('#waveform').width($(window).width() - 50);
-    //console.log($(window).width() - 50);
+    progressRatio = wavesurfer.getCurrentTime()/wavesurfer.getDuration();
+    $('#waveform').width($(window).width() - 50);
+    wavesurfer.drawBuffer();
+    wavesurfer.seekTo(progressRatio);
   } else {
     sidebar.className = 'sidebar maximized';
     body.className = 'body';
     angle.className = 'angle icon-double-angle-left';
     $('.tab-content').show();
-    //$('#waveform').width($(window).width() - 250);
-    //console.log($(window).width() - 250);
+    progressRatio = wavesurfer.getCurrentTime()/wavesurfer.getDuration();
+    $('#waveform').width($(window).width() - 250);
+    wavesurfer.drawBuffer();
+    wavesurfer.seekTo(progressRatio);
   }
   return false;
-};
+});
 
 
 var tabsFn = (function() {
@@ -416,3 +417,9 @@ var tabsFn = (function() {
     
   $(init);
 })();
+
+
+
+}); //end of document ready 
+
+
