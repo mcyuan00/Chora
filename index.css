@@ -275,7 +275,20 @@ content: "\f101";
 }
 .tab-content .active {
   display: block;
+  overflow-x:hidden;
 }
+
+
+#editButton {
+  position: relative;
+  width: 100%;
+  font-family: 'Amatic SC', cursive;
+  font-size: 20px;
+  background: #459cb6;
+  border: none;
+  color: #ffffff;
+}
+
 
 .formation{
     width: 100%;

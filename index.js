@@ -351,6 +351,20 @@ $('#previous-btn').click(function(e){
 });
 });
 
+var dancerEditing = false; 
+$('#editButton').on('click', function() {
+  console.log('hit')
+  if(!dancerEditing){
+    dancerEditing = true;
+    $('#danceTitle').removeAttr('readonly');
+    $('#editButton').innerHTML = "Save";
+  } else if (dancerEditing) {
+    dancerEditing = false;
+    $('#danceTitle').attr('readonly', true);
+    $('#editButton').innerHTML = "Edit";
+  }
+});
+
 
 
 function onClick() {
