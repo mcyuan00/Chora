@@ -78,6 +78,7 @@ document.onmousedown = function (e) {
 document.onmousemove = _move_elem;
 
 var currentDancer = null;
+var menuOpen = false; 
 
   $(document).mouseup(function(event) {
     _destroy();
@@ -89,24 +90,37 @@ var currentDancer = null;
       emptyDancer.style.position = "absolute";
       currentSlide.appendChild(emptyDancer);
     } else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
-      document.getElementById('menu').style.display = "inline-block";
-      document.getElementById('menu').style.position = "relative";
-      document.getElementById('menu').style.left = event.target.style.left;
-      document.getElementById('menu').style.top = event.target.style.top;
-      document.getElementById('menu').style.transform = "translate(-50%, -175%)";
+      if (!menuOpen){
+        document.getElementById('colorMenu').style.display = "none";
+        document.getElementById('menu').style.display = "inline-block";
+        document.getElementById('menu').style.position = "relative";
+        document.getElementById('menu').style.left = event.target.style.left;
+        document.getElementById('menu').style.top = event.target.style.top;
+        document.getElementById('menu').style.transform = "translate(-50%, -175%)";
 
+        document.getElementById('trash').style.display = "initial";
+        document.getElementById('trash').style.position = "absolute";
+        document.getElementById('trash').style.left = event.target.style.left;
+        document.getElementById('trash').style.top = event.target.style.top;
+        document.getElementById('trash').style.transform = "translate(-50%, 175%)";
+        currentDancer = event.target;
+        menuOpen = true;
+      } else {
+        document.getElementById('menu').style.display = "none";
+        document.getElementById('trash').style.display = "none";
+        menuOpen = false;
+        document.getElementById('colorMenu').style.display = "inline-block";
+        document.getElementById('colorMenu').style.position = "relative";
+        document.getElementById('colorMenu').style.left = event.target.style.left;
+        document.getElementById('colorMenu').style.top = event.target.style.top;
+        document.getElementById('colorMenu').style.transform = "translate(-50%, -175%)";
 
-
-
-      document.getElementById('trash').style.display = "initial";
-      document.getElementById('trash').style.position = "absolute";
-      document.getElementById('trash').style.left = event.target.style.left;
-      document.getElementById('trash').style.top = event.target.style.top;
-      document.getElementById('trash').style.transform = "translate(-50%, 175%)";
-      currentDancer = event.target;
+      }
     } else {
         document.getElementById('menu').style.display = "none";
         document.getElementById('trash').style.display = "none";
+        document.getElementById('colorMenu').style.display = "none";
+        menuOpen = false;
     }
     wasDragged = false;
   });
@@ -145,6 +159,13 @@ var currentDancer = null;
     } 
   });
 
+  $('#colorMenu').click(function(e){
+    var selectedColor = e.target;
+    if (currentDancer.className == "placed"){
+      currentDancer.style.background = selectedColor.style.background;
+    }
+  });
+
   $('#trash').click( function(e){
     currentSlide.removeChild(currentDancer);
     if(currentDancer.className == "placed"){
@@ -168,6 +189,13 @@ document.getElementById('menu').appendChild(createDancer("FU"));
 document.getElementById('menu').appendChild(createDancer("SS"));
 document.getElementById('menu').appendChild(createDancer("HU"));
 document.getElementById('menu').appendChild(createDancer("BO"));
+
+document.getElementById('colorMenu').appendChild(createColorSelection('#bff0e7'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#7addcd'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#459cb6'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#f99186'));
+document.getElementById('colorMenu').appendChild(createColorSelection('#fec35b'));
+
 
 function createDancer (dancerName) {
   var dancer = document.createElement("div");
@@ -195,6 +223,17 @@ function createEmptyDancer() {
   emptyDancer.style.opacity = "0.3";
   emptyDancer.className = "emptyDancer";
   return emptyDancer;
+}
+
+function createColorSelection(hex) {
+  var color = document.createElement("div");
+  color.style.width = "50px"; color.style.height = "50px";
+  color.style.borderRadius = "50%";
+  color.style.background = hex;
+  color.style.border = "thin solid gray";
+  color.style.float = "left";
+  color.style.marginRight = "10px";
+  return color;
 }
 
 $('#newFormation').click(makeNewSlide);

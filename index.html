@@ -19,9 +19,9 @@
         <p id="logo">Chora</p>
     </div>
     <div id="add">
-        <input id="newFormation" type="button" value="Formation" />
+        <input id="newFormation" type="button" value="Add Formation" />
         </li>
-        <input id="newTransition" type="button" value="Transition" />
+        <input id="newTransition" type="button" value="Add Transition" />
         </li>
     </div>
     <div class="sidebar maximized">
@@ -29,7 +29,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#a" data-toggle="tab"><span class="glyphicon glyphicon-th"></span></a></li>
                 <li><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-user"></span></a></li>
-                <li><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-user"></span></a></li>
+                <li><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span></a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="a">
@@ -63,10 +63,21 @@
                     </table>
                 </div>
                 <div class="tab-pane" id="b">
-                    <h2>Groups</h2>
+                    <h2>Dancers</h2>
+                    
+                    <div class = "footer">
+                        <button id = "addDancer">Add Dancer</button>
+                    </div>
                 </div>
                 <div class="tab-pane" id="c">
-                    <h2>Dancers</h2>
+                    <h2>Settings</h2>
+                    <form>
+                        <fieldset class="form-group">
+                        <label for="danceTitle">Dance Title</label>
+                        <input type="title" class="form-control" id="danceTitle" placeholder="Title">
+                        </fieldset>
+
+                    </form>
                 </div>
             </div>
             <!-- /tab-content -->
@@ -88,6 +99,7 @@
                     <div id="content">
                         <div id = "menu"></div>
                         <div id = "trash" width = "50px" height = "50px"><span class = "glyphicon glyphicon-trash"></span></div>
+                        <div id = "colorMenu"></div>
                     </div>
                 </td>
                 <td>
