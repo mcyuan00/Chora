@@ -220,7 +220,7 @@ function createDancer (dancerName) {
   dancer.appendChild(name);
   dancer.className = "dance";
   return dancer;
-}
+};
 
 function createEmptyDancer() {
   var emptyDancer = document.createElement("div");
@@ -230,7 +230,7 @@ function createEmptyDancer() {
   emptyDancer.style.opacity = "0.3";
   emptyDancer.className = "emptyDancer";
   return emptyDancer;
-}
+};
 
 function createColorSelection(hex) {
   var color = document.createElement("div");
@@ -241,7 +241,7 @@ function createColorSelection(hex) {
   color.style.float = "left";
   color.style.marginRight = "10px";
   return color;
-}
+};
 
 $('#newFormation').click(makeNewSlide);
 
@@ -262,9 +262,8 @@ function makeNewSlide(){
   slideNum += 1;
   $('#menu').children().each( function() {
     this.style.display = "initial";
-  }
-    )
-}
+  })
+};
 
  $('#newTransition').click(function(e){
   document.getElementById('menu').style.display = "none";
@@ -349,22 +348,31 @@ $('#previous-btn').click(function(e){
     console.log(slideNum);
   }
 });
-});
+
 
 var dancerEditing = false; 
-$('#editButton').on('click', function() {
+$('#editButton').on('click', function(){
   console.log('hit')
   if(!dancerEditing){
     dancerEditing = true;
     $('#danceTitle').removeAttr('readonly');
-    $('#editButton').innerHTML = "Save";
+    $('#numDancers').removeAttr('disabled');
+    $('#description').removeAttr('readonly');
+    $('#music').removeAttr('disabled');
+    document.getElementById('editButton').innerHTML = "Save";
   } else if (dancerEditing) {
     dancerEditing = false;
     $('#danceTitle').attr('readonly', true);
-    $('#editButton').innerHTML = "Edit";
+    $('#numDancers').attr('disabled', true);
+    $('#description').attr('readonly', true);
+    $('#music').attr('disabled', true);
+    document.getElementById('editButton').innerHTML = "Edit";
   }
 });
 
+
+
+}); //end of document ready 
 
 
 function onClick() {

@@ -13,10 +13,6 @@ canvas {
   font-size: 25px;
 }
 
-.footer{
-  position: absolute;
-  text-align: center;
-}
 
 #add {
   position: absolute;
@@ -279,7 +275,7 @@ content: "\f101";
 }
 
 
-#editButton {
+#editButton, #addDancer {
   position: relative;
   width: 100%;
   font-family: 'Amatic SC', cursive;
