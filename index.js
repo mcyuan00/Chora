@@ -89,6 +89,10 @@ var menuOpen = false;
       emptyDancer.style.transform = "translate(-50%, -50%)";
       emptyDancer.style.position = "absolute";
       currentSlide.appendChild(emptyDancer);
+      document.getElementById('menu').style.display = "none";
+      document.getElementById('trash').style.display = "none";
+      document.getElementById('colorMenu').style.display = "none";
+      menuOpen = false;
     } else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
       if (!menuOpen){
         document.getElementById('colorMenu').style.display = "none";
