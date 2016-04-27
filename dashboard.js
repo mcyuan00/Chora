@@ -17,6 +17,11 @@ $(document).ready(function() {
         console.log(value);
     })
 
+    $( ".sortable" ).sortable({
+        revert: true
+    });
+    $( ".sortable" ).disableSelection();
+
     function addDancerInfo(numDancers){
       for(i = 0; i< numDancers; i++){
 

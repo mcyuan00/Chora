@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <!-- <script src="login.js"></script> -->
@@ -18,28 +19,83 @@
       <p id = "project_header" class="col-md-3">Projects</p>
     </div>
 
-    <div class = "row project_background">
-      <div class = "col-md-2 project">
-        <button type="button" id = "new_project_button" class="project_button" data-toggle="modal" data-target="#new_project_modal"></button>
-        <label class = "labels">New Project</label>
-      </div>
-      <div class = "col-md-2 project">
-        <button type="button" id = "waveform_button" class="project_button" ></button>
-        <label class = "labels">Project 1</label>
-      </div>
-      <div class = "col-md-2 project">
-        <button type="button" id = "waveform2_button" class="project_button" ></button>
-        <label class = "labels">Project 2</label>
-      </div>
-      <div class = "col-md-2 project">
-        <button type="button" id = "waveform_button" class="project_button" ></button>
-        <label class = "labels">Project 3</label>
-      </div>
-      <div class = "col-md-2 project">
-        <button type="button" id = "waveform2_button" class="project_button" ></button>
-        <label class = "labels">Project 4</label>
+    <div id="wrapper">
+      <div id="columns" class="sortable">
+        <div class="pin ui-state-default">
+          <button type="button" id = "new_project_button" class="project_button" data-toggle="modal" data-target="#new_project_modal" data-backdrop = "true"></button>
+          <p>
+            New Project
+          </p>
+        </div>
+      
+        <div class="pin ui-state-default">
+          <button type="button" id = "waveform_button" class="project_button" ></button>
+          <p>
+            Project 1: <br>
+            Ridonkulous Footwork Show 2016 <br>
+            Music: "The Hills"
+          </p>
+        </div>
+      
+        <div class="pin ui-state-default">
+          <button type="button" id = "waveform2_button" class="project_button" ></button>
+          <p>
+            Project 2
+          </p>
+        </div>
+      
+        <div class="pin ui-state-default">
+          <button type="button" id = "waveform_button" class="project_button" ></button>
+          <p>
+            Project 3
+          </p>
+        </div>
+
+<!--         <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/2/2v3VhAp.png" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Sed feugiat consectetur pellentesque. Nam ac elit risus, 
+            ac blandit dui. Duis rutrum porta tortor ut convallis.
+            Duis rutrum porta tortor ut convallis.
+          </p>
+        </div>
+      
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
+          <p>
+            Donec a fermentum nisi. 
+          </p>
+        </div>
+      
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/6/6f3nXse.png" />
+          <p>
+            Nullam eget lectus augue. Donec eu sem sit amet ligula 
+            faucibus suscipit. Suspendisse rutrum turpis quis nunc 
+            convallis quis aliquam mauris suscipit.
+          </p>
+        </div>
+      
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/8/8kEc1hS.png" />
+          <p>
+            Nullam eget lectus augue. Donec eu sem sit amet ligula 
+            faucibus suscipit. Suspendisse rutrum turpis quis nunc 
+            convallis quis aliquam mauris suscipit.
+          </p>
+        </div>
+      
+        <div class="pin">
+          <img src="http://cssdeck.com/uploads/media/items/1/1swi3Qy.png" />
+          <p>
+            Donec a fermentum nisi. Integer dolor est, commodo ut 
+            sagittis vitae, egestas at augue. 
+          </p>
+        </div> -->
       </div>
     </div>
+
 
    <div class = "container">
     <!-- Modal -->
