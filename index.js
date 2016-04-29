@@ -16,7 +16,7 @@ $(document).ready(function() {
     wavesurfer.playPause();
   }
 
-  var slides = [], currentSlide = null; slideNum = 0, chosen = new Array(), x = 0, y = 0;
+  var slides = [], currentSlide = null; slideNum = 0, x = 0, y = 0;
 
 var selected = null, // Object of the element to be moved
     x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
@@ -68,11 +68,26 @@ function _destroy() {
     }
     selected = null;
 }
-
 // Bind the functions...
 document.onmousedown = function (e) {
-    if(e.target.className == "placed" || e.target.className == "emptyDancer"){
-      console.log(e.target.className);
+    if ((e.target.className == "placed" || e.target.className == "emptyDancer") && e.target.parentNode.parentNode.className == "transition") {
+      var currentLocation = e.target.style.left+e.target.style.top;
+      if (!(currentSlide.childNodes[2].innerHTML.indexOf(currentLocation)>-1)) {
+        var transitionDancer = createTransitionDancer();
+        transitionDancer.style.left = e.target.style.left;
+        transitionDancer.style.top = e.target.style.top;
+        transitionDancer.style.position = e.target.style.position;
+        transitionDancer.style.transform = "translate(-50%, -50%)";
+        currentSlide.appendChild(transitionDancer);
+        to = transitionDancer;
+        from = e.target;
+        var node = document.createTextNode(e.target.style.left + e.target.style.top);
+        currentSlide.childNodes[2].appendChild(node);
+        _drag_init(transitionDancer);
+        return false;
+      }
+    }
+    else if(e.target.className == "placed" || e.target.className == "emptyDancer"){
       _drag_init(e.target);
       return false;
   }
@@ -83,20 +98,51 @@ document.onmousemove = _move_elem;
 var currentDancer = null;
 var menuOpen = false; 
 
+function drawLine (x1, y1, x2, y2) {
+  var center = 0;
+  x1 += center; x2 += center;
+  y1 += center; y2 += center;
+  var width = center*.5;
+  //line
+  var canvas  = currentSlide.childNodes[1];
+  ctx = canvas.getContext('2d');
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = center * .1;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  //triangle
+  ctx.fillStyle = "black";
+  var angle = Math.atan((y2-y1)/(x2-x1));
+  angle += ((x2>x1)?-90:90)*Math.PI/180*-1;
+  if (x1 == x2 && y1 < y2) { // move up
+      angle += Math.PI;
+  } else if (x1 == x2 && y1 > y2) { // move down
+      angle -= Math.PI;
+  } 
+  drawTriangle(ctx, x2, y2, angle);
+} 
+function drawTriangle(ctx, x, y, angle) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  ctx.moveTo(0,0);
+  ctx.lineTo(8,12);
+  ctx.lineTo(-8,12);
+  ctx.closePath();
+  ctx.restore();
+  ctx.fill();
+}
+var from = null, to = null, canvas = null;
+
   $(document).mouseup(function(event) {
     _destroy();
-    if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") && document.getElementById('menu').style.display != "inline-block"){
-      var emptyDancer = createEmptyDancer();
-      x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
-      emptyDancer.style.left = x + "px"; emptyDancer.style.top = y + "px";
-      emptyDancer.style.transform = "translate(-50%, -50%)";
-      emptyDancer.style.position = "absolute";
-      currentSlide.appendChild(emptyDancer);
-      document.getElementById('menu').style.display = "none";
-      document.getElementById('trash').style.display = "none";
-      document.getElementById('colorMenu').style.display = "none";
-      menuOpen = false;
-    } else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
+    if (event.target.parentNode.className == "transition" && event.target.className == "transitionDancer") {
+      event.preventDefault();
+      drawLine(parseInt(from.style.left),parseInt(from.style.top),parseInt(to.style.left),parseInt(to.style.top));
+    }else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
       if (!menuOpen){
         document.getElementById('colorMenu').style.display = "none";
         document.getElementById('menu').style.display = "inline-block";
@@ -123,6 +169,18 @@ var menuOpen = false;
         document.getElementById('colorMenu').style.transform = "translate(-50%, -175%)";
 
       }
+    }
+    else if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") &&!wasDragged && document.getElementById('menu').style.display != "inline-block"){
+      var emptyDancer = createEmptyDancer();
+      x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
+      emptyDancer.style.left = x + "px"; emptyDancer.style.top = y + "px";
+      emptyDancer.style.transform = "translate(-50%, -50%)";
+      emptyDancer.style.position = "absolute";
+      currentSlide.appendChild(emptyDancer);
+      document.getElementById('menu').style.display = "none";
+      document.getElementById('trash').style.display = "none";
+      document.getElementById('colorMenu').style.display = "none";
+      menuOpen = false;
     } else {
         document.getElementById('menu').style.display = "none";
         document.getElementById('trash').style.display = "none";
@@ -133,7 +191,7 @@ var menuOpen = false;
   });
 
 
-
+  /*menu functionalities*/
   $('#menu').mouseover(function(e){
     if (e.target.className == "dance") {
       document.getElementById("menu").style.cursor = "pointer";
@@ -228,9 +286,20 @@ function createEmptyDancer() {
   emptyDancer.style.width = "50px"; emptyDancer.style.height = "50px";
   emptyDancer.style.borderRadius = "50%";
   emptyDancer.style.background = "#7addcd";
-  emptyDancer.style.opacity = "0.3";
+  emptyDancer.style.opacity = "0.85";
   emptyDancer.className = "emptyDancer";
   return emptyDancer;
+};
+
+function createTransitionDancer() {
+  var transitionDancer = document.createElement("div");
+  transitionDancer.style.width = "50px"; transitionDancer.style.height = "50px";
+  transitionDancer.style.borderRadius = "50%";
+  transitionDancer.style.background = "#none";
+  transitionDancer.style.borderStyle = "dashed";
+  transitionDancer.style.borderColor = "black";
+  transitionDancer.className = "transitionDancer";
+  return transitionDancer;
 };
 
 function createColorSelection(hex) {
@@ -244,10 +313,10 @@ function createColorSelection(hex) {
   return color;
 };
 
-$('#newFormation').click(makeNewSlide);
+$('#newFormation').click(makeNewFormation);
+$('#newTransition').click(makeNewTransition);
 
-function makeNewSlide(){
-  chosen = new Array()
+function makeNewFormation(){
   document.getElementById('menu').style.display = "none";
   if (slides.length > 0) {
     for (var i = 0; i < slides.length; ++i) {
@@ -266,8 +335,8 @@ function makeNewSlide(){
   })
 };
 
- $('#newTransition').click(function(e){
-  document.getElementById('menu').style.display = "none";
+ function makeNewTransition() {
+    document.getElementById('menu').style.display = "none";
    if (slides.length > 0) {
       for (var i = 0; i < slides.length; ++i) {
         slides[i].style.display = "none";
@@ -276,43 +345,39 @@ function makeNewSlide(){
     var div = document.createElement("div");
     div.style.width = "100%";
     div.style.height = "100%";
-    
-    var elem = document.createElement("img");
-    elem.setAttribute("src", "images/dummy.png");
-    elem.setAttribute("width", "100%");
-    div.appendChild(elem);
-    console.log(div);
+    div.className = "transition";
+    var previousFormation = currentSlide; //copy of previous formation
+    var transition = previousFormation.cloneNode(true);
+    transition.style.display = "block";
+    var children = transition.childNodes;
+    for (var i = 0; i <children.length; ++i)
+      children[i].style.opacity = ".4";
+    div.appendChild(transition);
+
+    var c = document.createElement("canvas"); //for arrows
+    c.width  = $('#content').width(); 
+    c.height = $('#content').height();
+    c.style.zIndex   = 100;
+    c.style.position = "absolute";
+    c.style.left = 0; c.style.top = 0;
+    c.className = "canvasOverlay";
+    div.appendChild(c);
+
+    var para = document.createElement("P");                       // Create a <p> node
+    var t = document.createTextNode("1");      // Create a text node
+    para.className = "dictionary";                                        // Append the text to <p>
+    div.appendChild(para); 
+
     document.getElementById("content").appendChild(div);
     slides.push(div);
     currentSlide = div;
     slideNum += 1;
+    $('#menu').children().each( function() {
+    this.style.display = "initial";
+    })
+};
 
-    /*var previousFormation = currentSlide; //copy of previous formation
-    var transition = previousFormation.cloneNode(true);
-    transition.style.display = "block";
-    div.appendChild(transition);
-
-    var overlayTransition = document.createElement("div"); //for dragging and dropping
-    overlayTransition.style.width = "100%";
-    overlayTransition.style.height = "100%";
-    overlayTransition.style.position = "absolute";
-    overlayTransition.style.left = "0";
-    overlayTransition.style.top = "0";
-    overlayTransition.style.display = "block";
-    div.appendChild(overlayTransition);
-
-    var c = document.createElement("CANVAS"); //for arrows
-    c.width  = "100%";
-    c.height = "100%";
-    c.style.zIndex   = 10;
-    c.style.position = "absolute";
-    div.appendChild(c);
-
-    document.getElementById("content").appendChild(div);
-    slides.push(div);
-    currentSlide = div;*/
-});
-
+/*create a formation from template*/
 $(".formation").click(function(e){
   var formation = e.target.cloneNode(true);
 
