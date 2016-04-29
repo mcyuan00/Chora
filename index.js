@@ -86,6 +86,16 @@ document.onmousedown = function (e) {
         _drag_init(transitionDancer);
         return false;
       }
+    } else if (e.target.className == "transitionDancer") {
+      /*var i = redraw.length-1;
+      while (i >= 0) {
+        if (redraw[i][2] == parseInt(e.target.style.left) && redraw[i][3] == parseInt(e.target.style.top)) {
+          redraw.splice(i);
+        }
+        i = i - 1;
+      }
+      redo = true;*/
+      _drag_init(e.target);
     }
     else if(e.target.className == "placed" || e.target.className == "emptyDancer"){
       _drag_init(e.target);
@@ -122,6 +132,7 @@ function drawLine (x1, y1, x2, y2) {
       angle -= Math.PI;
   } 
   drawTriangle(ctx, x2, y2, angle);
+  redo = false
 } 
 function drawTriangle(ctx, x, y, angle) {
   ctx.save();
@@ -135,13 +146,29 @@ function drawTriangle(ctx, x, y, angle) {
   ctx.restore();
   ctx.fill();
 }
-var from = null, to = null, canvas = null;
+/*function redrawLines (redrawList) {
+  var canvas  = currentSlide.childNodes[1];
+  ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (var i = 0; i < redrawList.length; ++i){
+    drawLine(redrawList[i][0], redrawList[i][1],redrawList[i][2],redrawList[i][3]);
+  }
+
+}*/
+var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
 
   $(document).mouseup(function(event) {
     _destroy();
     if (event.target.parentNode.className == "transition" && event.target.className == "transitionDancer") {
       event.preventDefault();
+      if (!redo){
       drawLine(parseInt(from.style.left),parseInt(from.style.top),parseInt(to.style.left),parseInt(to.style.top));
+      //redraw.push([parseInt(from.style.left),parseInt(from.style.top),parseInt(to.style.left),parseInt(to.style.top)]);
+      }
+      else {
+        redrawLines(redraw);
+      }
+      
     }else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
       if (!menuOpen){
         document.getElementById('colorMenu').style.display = "none";
