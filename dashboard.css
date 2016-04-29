@@ -84,7 +84,26 @@ body{
   background-size: 180px 180px;
 }
 
+#ballet1{
+  background: no-repeat url(/images/ballet1.jpg);
+  background-size: 24% 25%;
+}
 
+#ballet2{
+  background: no-repeat url(/images/ballet2.jpg);
+}
+
+#ballet3{
+  background: no-repeat url(/images/ballet3.jpg);
+}
+
+#group_dance{
+  background: no-repeat url(/images/group_dance.jpg);
+}
+
+#two_dancers{
+  background: no-repeat url(/images/two_dancers.jpg);
+}
 
 
 body {
@@ -173,7 +192,7 @@ body {
 }
 
 #columns:hover .pin:not(:hover) {
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 

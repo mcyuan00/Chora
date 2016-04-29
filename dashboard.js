@@ -2,6 +2,11 @@ $(document).ready(function() {
     // var header = document.getElementById("dancer_header");
     // header.style.visibility='hidden';
 
+    document.getElementById("waveform_button").onclick = function () {
+        console.log("hi");
+        location.href = document.location.href.replace("dashboard", "index");
+    };
+
     $("#form_part1").submit(function(e){
         var projectTitle = document.forms["form_part1"]["projectTitle"].value;
         var numDancers = document.forms["form_part1"]["numDancers"].value;
