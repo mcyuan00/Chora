@@ -68,54 +68,88 @@ function _destroy() {
     }
     selected = null;
 }
+var canvases = [];
+var targetPairs = [];
+var fromPlotted = [];
+var doNotMove = null;
 // Bind the functions...
 document.onmousedown = function (e) {
     if ((e.target.className == "placed" || e.target.className == "emptyDancer") && e.target.parentNode.parentNode.className == "transition") {
+      doNotMove = e.target;
+      if (!(fromPlotted[slideNum-1].indexOf(e.target)>-1)){
       var currentLocation = e.target.style.left+e.target.style.top;
-      if (!(currentSlide.childNodes[2].innerHTML.indexOf(currentLocation)>-1)) {
-        var transitionDancer = createTransitionDancer();
-        transitionDancer.style.left = e.target.style.left;
-        transitionDancer.style.top = e.target.style.top;
-        transitionDancer.style.position = e.target.style.position;
-        transitionDancer.style.transform = "translate(-50%, -50%)";
-        currentSlide.appendChild(transitionDancer);
-        to = transitionDancer;
-        from = e.target;
-        var node = document.createTextNode(e.target.style.left + e.target.style.top);
-        currentSlide.childNodes[2].appendChild(node);
-        _drag_init(transitionDancer);
-        return false;
-      }
-    } else if (e.target.className == "transitionDancer") {
-      /*var i = redraw.length-1;
-      while (i >= 0) {
-        if (redraw[i][2] == parseInt(e.target.style.left) && redraw[i][3] == parseInt(e.target.style.top)) {
-          redraw.splice(i);
-        }
-        i = i - 1;
-      }
-      redo = true;*/
+      var transitionDancer = createTransitionDancer();
+      transitionDancer.style.left = e.target.style.left;
+      transitionDancer.style.top = e.target.style.top;
+      transitionDancer.style.position = e.target.style.position;
+      transitionDancer.style.transform = "translate(-50%, -50%)";
+      currentSlide.appendChild(transitionDancer);
+      to = transitionDancer;
+      from = e.target;
+      targetPairs[slideNum-1][parseInt(to.className.charAt(to.className.length-1))] = from;
+      fromPlotted[slideNum-1].push(from);
+      _drag_init(transitionDancer);
+      return false;
+      } 
+    } else if (e.target.className.indexOf("transitionDancer")>-1) {
+      to = e.target;
+      from = targetPairs[slideNum-1][parseInt(to.className.charAt(to.className.length-1))];
       _drag_init(e.target);
     }
     else if(e.target.className == "placed" || e.target.className == "emptyDancer"){
       _drag_init(e.target);
+      console.log("hit");
       return false;
-  }
+  } 
 };
 
 document.onmousemove = _move_elem;
 
 var currentDancer = null;
 var menuOpen = false; 
-
-function drawLine (x1, y1, x2, y2) {
+function drawLine (target, x1, y1, x2, y2) {
+  var c = document.createElement("canvas"); //for arrows
+  c.width  = $('#content').width(); 
+  c.height = $('#content').height();
+  c.style.position = "absolute";
+  c.style.left = 0; c.style.top = 0;
+  c.className = target.className;
+  
+  target.parentNode.appendChild(c);
+  canvases[slideNum-1].push(c);
   var center = 0;
   x1 += center; x2 += center;
   y1 += center; y2 += center;
   var width = center*.5;
   //line
-  var canvas  = currentSlide.childNodes[1];
+  ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, c.width, c.height);
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = center * .1;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  //triangle
+  ctx.fillStyle = "black";
+  var angle = Math.atan((y2-y1)/(x2-x1));
+  angle += ((x2>x1)?-90:90)*Math.PI/180*-1;
+  if (x1 == x2 && y1 < y2) { // move up
+      angle += Math.PI;
+  } else if (x1 == x2 && y1 > y2) { // move down
+      angle -= Math.PI;
+  } 
+  drawTriangle(ctx, x2, y2, angle);
+  redo = false
+} 
+function redrawLine (canvas, x1, y1, x2, y2) {
+  var center = 0;
+  x1 += center; x2 += center;
+  y1 += center; y2 += center;
+  var width = center*.5;
+  //line
   ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.strokeStyle = "black";
   ctx.lineWidth = center * .1;
   ctx.beginPath();
@@ -146,30 +180,28 @@ function drawTriangle(ctx, x, y, angle) {
   ctx.restore();
   ctx.fill();
 }
-/*function redrawLines (redrawList) {
-  var canvas  = currentSlide.childNodes[1];
-  ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (var i = 0; i < redrawList.length; ++i){
-    drawLine(redrawList[i][0], redrawList[i][1],redrawList[i][2],redrawList[i][3]);
-  }
 
-}*/
 var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
 
   $(document).mouseup(function(event) {
     _destroy();
-    if (event.target.parentNode.className == "transition" && event.target.className == "transitionDancer") {
+    if (event.target.parentNode.className == "transition" && event.target.className.indexOf("transitionDancer")>-1)  {
       event.preventDefault();
       if (!redo){
-      drawLine(parseInt(from.style.left),parseInt(from.style.top),parseInt(to.style.left),parseInt(to.style.top));
-      //redraw.push([parseInt(from.style.left),parseInt(from.style.top),parseInt(to.style.left),parseInt(to.style.top)]);
-      }
-      else {
-        redrawLines(redraw);
-      }
-      
-    }else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
+        var j = 0;
+        for (var i = 0; i < canvases[slideNum-1].length; ++i) {
+          if (event.target.className === canvases[slideNum-1][i].className) {
+            redrawLine(canvases[slideNum-1][i], parseInt(from.style.left),parseInt(from.style.top),parseInt(to.style.left),parseInt(to.style.top));
+          } else {
+            j += 1;
+          }
+        }
+        if (j === canvases[slideNum-1].length) {
+          drawLine(event.target, parseInt(from.style.left),parseInt(from.style.top),parseInt(to.style.left),parseInt(to.style.top));
+        }
+        }
+      } 
+      else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
       if (!menuOpen){
         document.getElementById('colorMenu').style.display = "none";
         document.getElementById('menu').style.display = "inline-block";
@@ -198,6 +230,7 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
       }
     }
     else if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") &&!wasDragged && document.getElementById('menu').style.display != "inline-block"){
+      if (!(fromPlotted[slideNum-1].indexOf(doNotMove)>-1) ) {
       var emptyDancer = createEmptyDancer();
       x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
       emptyDancer.style.left = x + "px"; emptyDancer.style.top = y + "px";
@@ -208,6 +241,7 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
       document.getElementById('trash').style.display = "none";
       document.getElementById('colorMenu').style.display = "none";
       menuOpen = false;
+    }
     } else {
         document.getElementById('menu').style.display = "none";
         document.getElementById('trash').style.display = "none";
@@ -317,7 +351,7 @@ function createEmptyDancer() {
   emptyDancer.className = "emptyDancer";
   return emptyDancer;
 };
-
+var transitionNumber = 1;
 function createTransitionDancer() {
   var transitionDancer = document.createElement("div");
   transitionDancer.style.width = "50px"; transitionDancer.style.height = "50px";
@@ -325,7 +359,8 @@ function createTransitionDancer() {
   transitionDancer.style.background = "#none";
   transitionDancer.style.borderStyle = "dashed";
   transitionDancer.style.borderColor = "black";
-  transitionDancer.className = "transitionDancer";
+  transitionDancer.className = "transitionDancer" + transitionNumber;
+  transitionNumber += 1;
   return transitionDancer;
 };
 
@@ -344,6 +379,9 @@ $('#newFormation').click(makeNewFormation);
 $('#newTransition').click(makeNewTransition);
 
 function makeNewFormation(){
+  canvases.push([]);
+  targetPairs.push(new Array());
+  fromPlotted.push([]);
   document.getElementById('menu').style.display = "none";
   if (slides.length > 0) {
     for (var i = 0; i < slides.length; ++i) {
@@ -363,6 +401,9 @@ function makeNewFormation(){
 };
 
  function makeNewTransition() {
+    canvases.push([]);
+    targetPairs.push(new Array());
+    fromPlotted.push([]);
     document.getElementById('menu').style.display = "none";
    if (slides.length > 0) {
       for (var i = 0; i < slides.length; ++i) {
@@ -380,20 +421,6 @@ function makeNewFormation(){
     for (var i = 0; i <children.length; ++i)
       children[i].style.opacity = ".4";
     div.appendChild(transition);
-
-    var c = document.createElement("canvas"); //for arrows
-    c.width  = $('#content').width(); 
-    c.height = $('#content').height();
-    c.style.zIndex   = 100;
-    c.style.position = "absolute";
-    c.style.left = 0; c.style.top = 0;
-    c.className = "canvasOverlay";
-    div.appendChild(c);
-
-    var para = document.createElement("P");                       // Create a <p> node
-    var t = document.createTextNode("1");      // Create a text node
-    para.className = "dictionary";                                        // Append the text to <p>
-    div.appendChild(para); 
 
     document.getElementById("content").appendChild(div);
     slides.push(div);
