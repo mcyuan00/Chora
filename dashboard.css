@@ -85,24 +85,35 @@ body{
 }
 
 #ballet1{
-  background: no-repeat url(/images/ballet1.jpg);
-  background-size: 24% 25%;
+  background: no-repeat url(/images/ballet.jpg);
+  background-size: 100%
+  width: 180px;
+  height: 270px;
 }
 
 #ballet2{
   background: no-repeat url(/images/ballet2.jpg);
+  background-size: 100%;
+  width: 180px;
+  height: 265px;
 }
 
 #ballet3{
   background: no-repeat url(/images/ballet3.jpg);
+  background-size: 100%;
+  height: 300px;
 }
 
 #group_dance{
   background: no-repeat url(/images/group_dance.jpg);
+  background-size: 100%;
+  height: 80px;
 }
 
 #two_dancers{
   background: no-repeat url(/images/two_dancers.jpg);
+  background-size: 100%;
+  height: 225px;
 }
 
 
@@ -165,7 +176,7 @@ body {
   margin-bottom: 5px;
   width: 180px;
   height: 180px;
-  background-size: 180px 180px;
+  background-size: 100%;
 }
 
 .pin p {

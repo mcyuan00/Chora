@@ -3,16 +3,27 @@ $(document).ready(function() {
     // header.style.visibility='hidden';
 
     document.getElementById("waveform_button").onclick = function () {
-        console.log("hi");
         location.href = document.location.href.replace("dashboard", "index");
     };
 
     $("#form_part1").submit(function(e){
         var projectTitle = document.forms["form_part1"]["projectTitle"].value;
         var numDancers = document.forms["form_part1"]["numDancers"].value;
-        $("#dancer_header").css('visibility','visible');
-        // console.log("sucess");
-        addDancerInfo(numDancers);
+        var file = document.forms["form_part1"]["music"].value;
+        var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+
+        var div = document.createElement('div');
+        div.className = "pin ui-state-default"
+        var button = document.createElement("button");
+        button.classname = "project_button";
+        var p = document.createElement("p");
+        var node = document.createTextNode(projectTitle + "<br>" + filename + "<br>" + numDancers +" dancers");
+        p.appendChild(node);
+        div.appendChild(button);
+        div.appendChild(p);
+
+        var first = document.getElementById("first");
+        document.getElementById("columns").insertBefore(div, first);
     });
 
 
