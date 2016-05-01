@@ -66,7 +66,7 @@
                     <h2>Dancers</h2>
                     
                     
-                    <button id = "addDancer">Add Dancer</button>
+                    <button id = "addDancer" button type="button" data-toggle="modal" data-target="#new_dancer_modal" data-backdrop = "true">Add Dancer</button>
                     
                 </div>
                 <div class="tab-pane" id="c">
@@ -142,6 +142,43 @@
         </div>
         <div id="waveform"></div> 
     </div>
+
+
+       <div class = "container">
+    <!-- Modal -->
+    <div id="new_dancer_modal" class="modal fade" role="dialog">
+      <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Dancer</h4>
+          </div>
+          <div class="modal-body">
+            <div class = "row">
+              <div class = "form col-md-11">
+                <form id = "form_part1" name = "form_part1">
+                  <fieldset class="form-group">
+                    <label for="dancerName">Dancer Name</label>
+                    <input type="text" class="form-control" id="DancerName" name ="DancerName" placeholder="First, Last" required>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="dancerInfo">Dancer Info</label>
+                    <textarea class="form-control" id="dancerInfo" name= "dancerInfo" row = 3 required></textarea>
+                  </fieldset>
+                  <button type="submit" class="btn btn-primary" id = "submit_button">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+   </div> 
 </body>
 
 </html>
