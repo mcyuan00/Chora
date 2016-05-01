@@ -17,6 +17,7 @@ $(document).ready(function() {
   }
 
   var slides = [], currentSlide = null; slideNum = 0, x = 0, y = 0;
+  var visible = [], currentPlotted = [];
 
 var selected = null, // Object of the element to be moved
     x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
@@ -218,6 +219,7 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
         currentDancer = event.target;
         menuOpen = true;
       } else {
+        currentDancer = event.target;
         document.getElementById('menu').style.display = "none";
         document.getElementById('trash').style.display = "none";
         menuOpen = false;
@@ -229,8 +231,8 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
 
       }
     }
-    else if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") &&!wasDragged && document.getElementById('menu').style.display != "inline-block"){
-      if (!(fromPlotted[slideNum-1].indexOf(doNotMove)>-1) ) {
+    else if ((event.target.parentNode.id == "content" || event.target.parentNode.className == "transition") &&!wasDragged && document.getElementById('colorMenu').style.display != "inline-block" && !menuOpen){
+      //if (!(fromPlotted[slideNum-1].indexOf(doNotMove)>-1) ) {
       var emptyDancer = createEmptyDancer();
       x = event.clientX - $('#content').offset().left; y = event.clientY - $('#content').offset().top;
       emptyDancer.style.left = x + "px"; emptyDancer.style.top = y + "px";
@@ -241,12 +243,14 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
       document.getElementById('trash').style.display = "none";
       document.getElementById('colorMenu').style.display = "none";
       menuOpen = false;
-    }
+      
+      //}
     } else {
         document.getElementById('menu').style.display = "none";
         document.getElementById('trash').style.display = "none";
         document.getElementById('colorMenu').style.display = "none";
         menuOpen = false;
+        
     }
     wasDragged = false;
   });
@@ -264,7 +268,7 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
   $('#menu').click(function(e){
     var placeDancer = e.target;
     if ( placeDancer.textContent.length ==2) {
-      var dancerFinal = createDancer(e.target.innerHTML);
+      var dancerFinal = createDancer(e.target.children[0].innerHTML);
       dancerFinal.className = "placed";
       currentSlide.appendChild(dancerFinal);
       dancerFinal.style.left = currentDancer.style.left; dancerFinal.style.top = currentDancer.style.top;
@@ -272,13 +276,19 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
       dancerFinal.style.background = currentDancer.style.background;
       currentSlide.removeChild(currentDancer);
       if(currentDancer.className == "placed"){
-        var nameVisible = currentDancer.children[0].children[0].innerHTML;
+        var nameVisible = currentDancer.children[0].innerHTML;
         $('#menu').children().each( function() {
           if( this.children[0].innerHTML == nameVisible){
             this.style.display = "initial";
           };
         });
+        var index = currentPlotted.indexOf(nameVisible);
+        if (index > -1) {
+          currentPlotted.splice(index, 1);
+        }
       }
+      currentPlotted.push(e.target.children[0].innerHTML);
+      console.log(currentPlotted);
       currentDancer = null;
       dancerFinal.style.position = "absolute";
       document.getElementById("menu").style.display = "none";
@@ -296,12 +306,18 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
   $('#trash').click( function(e){
     currentSlide.removeChild(currentDancer);
     if(currentDancer.className == "placed"){
-        var nameVisible = currentDancer.children[0].children[0].innerHTML;
+        var nameVisible = currentDancer.children[0].innerHTML;
         $('#menu').children().each( function() {
           if( this.children[0].innerHTML == nameVisible){
             this.style.display = "initial";
+            
+
           };
         });
+        var index = currentPlotted.indexOf(nameVisible);
+        if (index > -1) {
+          currentPlotted.splice(index, 1);
+        }
       }
   })
 
@@ -375,6 +391,10 @@ function createColorSelection(hex) {
   return color;
 };
 
+function isInArray(value, array) {
+  return array.indexOf(value) > -1;
+}
+
 $('#newFormation').click(makeNewFormation);
 $('#newTransition').click(makeNewTransition);
 
@@ -395,9 +415,11 @@ function makeNewFormation(){
   slides.push(div);
   currentSlide = div;
   slideNum += 1;
+  currentPlotted = [];
+  visible.push(currentPlotted);
   $('#menu').children().each( function() {
     this.style.display = "initial";
-  })
+  });
 };
 
  function makeNewTransition() {
@@ -426,10 +448,16 @@ function makeNewFormation(){
     slides.push(div);
     currentSlide = div;
     slideNum += 1;
+    visible.push([]);
+    console.log(currentPlotted);
     $('#menu').children().each( function() {
-    this.style.display = "initial";
-    })
-};
+      if(isInArray(this.children[0].innerHTML, currentPlotted )){
+        this.style.display = "none";
+      } else {
+        this.style.display = "initial"; //makes visible
+      }
+    });
+  };
 
 /*create a formation from template*/
 $(".formation").click(function(e){
@@ -448,12 +476,25 @@ $(".formation").click(function(e){
 $('#next-btn').click(function(e){
   if (slideNum < slides.length){
     currentSlide.style.display = "none";
+    document.getElementById('menu').style.display = "none";
     
     slideNum = slideNum + 1;
     currentSlide = slides[slideNum - 1];
     currentSlide.style.display = 'block';
-    
-    console.log(slideNum);
+
+    if( currentSlide.className == "transition"){
+      currentPlotted = visible[slideNum - 2];
+    } else {
+      currentPlotted = visible[slideNum - 1];
+    }
+
+    $('#menu').children().each( function() {
+      if(isInArray(this.children[0].innerHTML, currentPlotted )){
+        this.style.display = "none";
+      } else {
+        this.style.display = "initial"; //makes visible
+      }
+    });
   }
 });
 
@@ -465,7 +506,19 @@ $('#previous-btn').click(function(e){
     currentSlide = slides[slideNum - 1];
     currentSlide.style.display = "block";
 
-    console.log(slideNum);
+    if( currentSlide.className == "transition"){
+      currentPlotted = visible[slideNum - 2];
+    } else {
+      currentPlotted = visible[slideNum - 1];
+    }
+
+    $('#menu').children().each( function() {
+      if(isInArray(this.children[0].innerHTML, currentPlotted )){
+        this.style.display = "none";
+      } else {
+        this.style.display = "initial"; //makes visible
+      }
+    });
   }
 });
 
