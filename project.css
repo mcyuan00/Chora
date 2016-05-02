@@ -113,14 +113,14 @@ canvas {
 }
 .body #next-btn{
   position: absolute;
-  left: 80%; top: 50%;
+  left: 75%; top: 50%;
   z-index: 20;
   transform: translate(-50%, -50%);
 }
 
 .body #previous-btn{
   position: absolute;
-  left: 20%; top: 50%;
+  left: 25%; top: 50%;
   z-index: 20;
   transform: translate(-50%, -50%);
 }
