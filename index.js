@@ -406,6 +406,8 @@ $('#newFormation').click(makeNewFormation);
 $('#newTransition').click(makeNewTransition);
 
 function makeNewFormation(){
+  var background = document.getElementById("content");
+  background.style.backgroundColor = "white";
   canvases.push([]);
   targetPairs.push(new Array());
   fromPlotted.push([]);
@@ -418,7 +420,7 @@ function makeNewFormation(){
   var div = document.createElement("div");
   div.style.width = "100%";
   div.style.height = "100%";
-  div.style.backgroundColor = "white";
+  div.style.backgroundColor = "#none";
   document.getElementById('content').appendChild(div);
   slides.push(div);
   currentSlide = div;
@@ -803,8 +805,8 @@ $('#editButton').on('click', function(){
 });
 
 $('#addDancer').click(function(){
-  var name = $('#DancerName').val();
-  console.log("yes");
+  // var name = $('#DancerName').modal();
+  // console.log(name);
 });
 
 $('#sidebar-toggle').click(function() {
