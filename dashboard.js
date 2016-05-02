@@ -3,7 +3,7 @@ $(document).ready(function() {
     // header.style.visibility='hidden';
 
     document.getElementById("waveform_button").onclick = function () {
-        location.href = document.location.href.replace("dashboard", "index");
+        location.href = document.location.href.replace("dashboard", "project");
     };
 
     $("#form_part1").submit(function(e){
