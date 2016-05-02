@@ -1,3 +1,6 @@
+body {
+  min-width: 1000px;
+}
 .dictionary {
   visibility: hidden;
 }
@@ -107,7 +110,7 @@ canvas {
 	background-color: #FFFFFF;
 	width: 525px; height: 375px;
 	position: absolute;
-	left: 50%; top: 50%;
+	left: 45%; top: 50%;
   z-index: 20;
 	transform: translate(-50%, -50%);
 }
