@@ -516,50 +516,50 @@ $(".formation").click(function(e){
   if (e.target.id === "formation1"){
 
     emptyDancer1.style.left = "100px";
-    emptyDancer1.style.top = "200px";
+    emptyDancer1.style.top = "100px";
     emptyDancer1.style.transform = "translate(-50%, -50%)";
 
     
     currentSlide.appendChild(emptyDancer1);
 
-    emptyDancer2.style.left = "300px";
-    emptyDancer2.style.top = "400px";
+    emptyDancer2.style.left = "250px";
+    emptyDancer2.style.top = "100px";
     emptyDancer2.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer2);
 
-    emptyDancer3.style.left = "500px";
-    emptyDancer3.style.top = "400px";
+    emptyDancer3.style.left = "400px";
+    emptyDancer3.style.top = "100px";
     emptyDancer3.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer3);
 
-    emptyDancer4.style.left = "100px";
-    emptyDancer4.style.top = "300px";
+    emptyDancer4.style.left = "75px";
+    emptyDancer4.style.top = "200px";
     emptyDancer4.style.transform = "translate(-50%, -50%)";
  
     currentSlide.appendChild(emptyDancer4);
 
-    emptyDancer5.style.left = "200px";
-    emptyDancer5.style.top = "300px";
+    emptyDancer5.style.left = "125px";
+    emptyDancer5.style.top = "200px";
     emptyDancer5.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer5);
 
-    emptyDancer6.style.left = "300px";
-    emptyDancer6.style.top = "600px";
+    emptyDancer6.style.left = "250px";
+    emptyDancer6.style.top = "200px";
     emptyDancer6.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer6);
 
-    emptyDancer7.style.left = "150px";
+    emptyDancer7.style.left = "375px";
     emptyDancer7.style.top = "200px";
     emptyDancer7.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer7);
 
-    emptyDancer8.style.left = "450px";
-    emptyDancer8.style.top = "350px";
+    emptyDancer8.style.left = "425px";
+    emptyDancer8.style.top = "200px";
     emptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer8);
