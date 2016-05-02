@@ -1,3 +1,6 @@
+body {
+  min-width: 1000px;
+}
 .dictionary {
   visibility: hidden;
 }
@@ -19,7 +22,7 @@ canvas {
 
 #add {
   position: absolute;
-  top: 11%; left: 50%;
+  top: 11%; left: 45%;
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 50;
@@ -107,20 +110,20 @@ canvas {
 	background-color: #FFFFFF;
 	width: 525px; height: 375px;
 	position: absolute;
-	left: 50%; top: 50%;
+	left: 45%; top: 50%;
   z-index: 20;
 	transform: translate(-50%, -50%);
 }
 .body #next-btn{
   position: absolute;
-  left: 75%; top: 50%;
+  left: 68%; top: 50%;
   z-index: 20;
   transform: translate(-50%, -50%);
 }
 
 .body #previous-btn{
   position: absolute;
-  left: 25%; top: 50%;
+  left: 22%; top: 50%;
   z-index: 20;
   transform: translate(-50%, -50%);
 }
