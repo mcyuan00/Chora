@@ -60,7 +60,7 @@ body{
 }
 
 #new_project_button{
-  background: no-repeat url(/images/new_project.png);
+  background: no-repeat url(./images/new_project.png);
   background-size: 180px 180px;
 }
 
@@ -75,43 +75,43 @@ body{
 }
 
 #waveform_button{
-  background: no-repeat url(/images/waveform.png);
+  background: no-repeat url(./images/waveform.png);
   background-size: 180px 180px;
 }
 
 #waveform2_button{
-  background: no-repeat url(/images/waveform2.png);
+  background: no-repeat url(./images/waveform2.png);
   background-size: 180px 180px;
 }
 
 #ballet1{
-  background: no-repeat url(/images/ballet.jpg);
+  background: no-repeat url(./images/ballet.jpg);
   background-size: 100%
   width: 180px;
   height: 270px;
 }
 
 #ballet2{
-  background: no-repeat url(/images/ballet2.jpg);
+  background: no-repeat url(./images/ballet2.jpg);
   background-size: 100%;
   width: 180px;
   height: 265px;
 }
 
 #ballet3{
-  background: no-repeat url(/images/ballet3.jpg);
+  background: no-repeat url(./images/ballet3.jpg);
   background-size: 100%;
   height: 300px;
 }
 
 #group_dance{
-  background: no-repeat url(/images/group_dance.jpg);
+  background: no-repeat url(./images/group_dance.jpg);
   background-size: 100%;
   height: 80px;
 }
 
 #two_dancers{
-  background: no-repeat url(/images/two_dancers.jpg);
+  background: no-repeat url(./images/two_dancers.jpg);
   background-size: 100%;
   height: 225px;
 }
