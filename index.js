@@ -24,6 +24,13 @@ var selected = null, // Object of the element to be moved
     x_elem = 0, y_elem = 0; // Stores top, left values (edge) of the element
     x_pos_original = 0, y_pos_original = 0; //position to return to if out of bounds
 
+if(currentSlide === null){
+  var div = document.getElementById("content");
+  div.style.backgroundColor = "d3d3d3";
+}
+
+
+
 // Will be called when user starts dragging an element
 function _drag_init(elem) {
     // Store the object of the element which needs to be moved
@@ -399,6 +406,8 @@ $('#newFormation').click(makeNewFormation);
 $('#newTransition').click(makeNewTransition);
 
 function makeNewFormation(){
+  var background = document.getElementById("content");
+  background.style.backgroundColor = "white";
   canvases.push([]);
   targetPairs.push(new Array());
   fromPlotted.push([]);
@@ -411,6 +420,7 @@ function makeNewFormation(){
   var div = document.createElement("div");
   div.style.width = "100%";
   div.style.height = "100%";
+  div.style.backgroundColor = "#none";
   document.getElementById('content').appendChild(div);
   slides.push(div);
   currentSlide = div;
@@ -461,16 +471,267 @@ function makeNewFormation(){
 
 /*create a formation from template*/
 $(".formation").click(function(e){
-  var formation = e.target.cloneNode(true);
+  currentSlide.innerHTML = "";
+  var emptyDancer1 = createEmptyDancer();
+  var emptyDancer2 = createEmptyDancer();
+  var emptyDancer3 = createEmptyDancer();
+  var emptyDancer4 = createEmptyDancer();
+  var emptyDancer5 = createEmptyDancer();
+  var emptyDancer6 = createEmptyDancer();
+  var emptyDancer7 = createEmptyDancer();
+  var emptyDancer8 = createEmptyDancer();
 
-  formation.style.width = "100%";
-  formation.style.height = "100%";
-  formation.style.position = "absolute";
-  formation.style.left = "0";
-  formation.style.top = "0";
-  formation.style.display = "block";
-  formation.style.zIndex = "20";
-  currentSlide.appendChild(formation);
+  emptyDancer1.style.position = "absolute"
+  emptyDancer1.style.display = "block";
+  emptyDancer1.style.zIndex = "20";
+
+  emptyDancer2.style.position = "absolute"
+  emptyDancer2.style.display = "block";
+  emptyDancer2.style.zIndex = "20";
+
+  emptyDancer3.style.position = "absolute"
+  emptyDancer3.style.display = "block";
+  emptyDancer3.style.zIndex = "20";
+
+  emptyDancer4.style.position = "absolute"
+  emptyDancer4.style.display = "block";
+  emptyDancer4.style.zIndex = "20";
+
+  emptyDancer5.style.position = "absolute"
+  emptyDancer5.style.display = "block";
+  emptyDancer5.style.zIndex = "20";
+
+  emptyDancer6.style.position = "absolute"
+  emptyDancer6.style.display = "block";
+  emptyDancer6.style.zIndex = "20";
+
+  emptyDancer7.style.position = "absolute"
+  emptyDancer7.style.display = "block";
+  emptyDancer7.style.zIndex = "20";
+
+  emptyDancer8.style.position = "absolute"
+  emptyDancer8.style.display = "block";
+  emptyDancer8.style.zIndex = "20";
+
+  if (e.target.id === "formation1"){
+
+    emptyDancer1.style.left = "calc(20% - 25px)";
+    emptyDancer1.style.top = "calc(40% - 25px)";
+    
+    currentSlide.appendChild(emptyDancer1);
+
+    emptyDancer2.style.left = "calc(50% - 25px)";
+    emptyDancer2.style.top = "calc(40% - 25px)";
+
+    currentSlide.appendChild(emptyDancer2);
+
+    emptyDancer3.style.left = "calc(80% - 25px)";
+    emptyDancer3.style.top = "calc(40% - 25px)";
+
+    currentSlide.appendChild(emptyDancer3);
+
+    emptyDancer4.style.left = "calc(10% - 25px)";
+    emptyDancer4.style.top = "calc(60% - 25px)";
+ 
+    currentSlide.appendChild(emptyDancer4);
+
+    emptyDancer5.style.left = "calc(30% - 25px)";
+    emptyDancer5.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer5);
+
+    emptyDancer6.style.left = "calc(50% - 25px)";
+    emptyDancer6.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer6);
+
+    emptyDancer7.style.left = "calc(90% - 25px)";
+    emptyDancer7.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer7);
+
+    emptyDancer8.style.left = "calc(70% - 25px)";
+    emptyDancer8.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer8);
+
+
+  }
+  if (e.target.id === "formation2"){
+    emptyDancer1.style.left = "calc(60% - 25px)";
+    emptyDancer1.style.top = "calc(30% - 25px)";
+    
+    currentSlide.appendChild(emptyDancer1);
+
+    emptyDancer2.style.left = "calc(60% - 25px)";
+    emptyDancer2.style.top = "calc(45% - 25px)";
+
+    currentSlide.appendChild(emptyDancer2);
+
+    emptyDancer3.style.left = "calc(60% - 25px)";
+    emptyDancer3.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer3);
+
+    emptyDancer4.style.left = "calc(40% - 25px)";
+    emptyDancer4.style.top = "calc(45% - 25px)";
+ 
+    currentSlide.appendChild(emptyDancer4);
+
+    emptyDancer5.style.left = "calc(40% - 25px)";
+    emptyDancer5.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer5);
+
+    emptyDancer6.style.left = "calc(40% - 25px)";
+    emptyDancer6.style.top = "calc(75% - 25px)";
+
+    currentSlide.appendChild(emptyDancer6);
+
+    emptyDancer7.style.left = "calc(80% - 25px)";
+    emptyDancer7.style.top = "calc(45% - 25px)";
+
+    currentSlide.appendChild(emptyDancer7);
+
+    emptyDancer8.style.left = "calc(20% - 25px)";
+    emptyDancer8.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer8);
+  }
+  if (e.target.id === "formation3"){
+    emptyDancer1.style.left = "calc(50% - 25px)";
+    emptyDancer1.style.top = "calc(20% - 25px)";
+    
+    currentSlide.appendChild(emptyDancer1);
+
+    emptyDancer2.style.left = "calc(40% - 25px)";
+    emptyDancer2.style.top = "calc(40% - 25px)";
+
+    currentSlide.appendChild(emptyDancer2);
+
+    emptyDancer3.style.left = "calc(60% - 25px)";
+    emptyDancer3.style.top = "calc(40% - 25px)";
+
+    currentSlide.appendChild(emptyDancer3);
+
+    emptyDancer4.style.left = "calc(50% - 25px)";
+    emptyDancer4.style.top = "calc(60% - 25px)";
+ 
+    currentSlide.appendChild(emptyDancer4);
+
+    emptyDancer5.style.left = "calc(30% - 25px)";
+    emptyDancer5.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer5);
+
+    emptyDancer6.style.left = "calc(70% - 25px)";
+    emptyDancer6.style.top = "calc(60% - 25px)";
+
+    currentSlide.appendChild(emptyDancer6);
+
+    emptyDancer7.style.left = "calc(40% - 25px)";
+    emptyDancer7.style.top = "calc(80% - 25px)"
+    currentSlide.appendChild(emptyDancer7);
+
+    emptyDancer8.style.left = "calc(60% - 25px)";
+    emptyDancer8.style.top = "calc(80% - 25px)";
+
+    currentSlide.appendChild(emptyDancer8);
+  }
+  if (e.target.id === "formation4"){
+    emptyDancer1.style.left = "calc(25% - 25px)";
+    emptyDancer1.style.top = "calc(30% - 25px)";
+    
+    currentSlide.appendChild(emptyDancer1);
+
+    emptyDancer2.style.left = "calc(75% - 25px)";
+    emptyDancer2.style.top = "calc(30% - 25px)";
+
+    currentSlide.appendChild(emptyDancer2);
+
+    emptyDancer3.style.left = "calc(10% - 25px)";
+    emptyDancer3.style.top = "calc(50% - 25px)";
+
+    currentSlide.appendChild(emptyDancer3);
+
+    emptyDancer4.style.left = "calc(40% - 25px)";
+    emptyDancer4.style.top = "calc(50% - 25px)";
+ 
+    currentSlide.appendChild(emptyDancer4);
+
+    emptyDancer5.style.left = "calc(60% - 25px)";
+    emptyDancer5.style.top = "calc(50% - 25px)";
+
+    currentSlide.appendChild(emptyDancer5);
+
+    emptyDancer6.style.left = "calc(90% - 25px)";
+    emptyDancer6.style.top = "calc(50% - 25px)";
+
+    currentSlide.appendChild(emptyDancer6);
+
+    emptyDancer7.style.left = "calc(25% - 25px)";
+    emptyDancer7.style.top = "calc(70% - 25px)";
+
+    currentSlide.appendChild(emptyDancer7);
+
+    emptyDancer8.style.left = "calc(75% - 25px)";
+    emptyDancer8.style.top = "calc(70% - 25px)";
+
+    currentSlide.appendChild(emptyDancer8);
+  }
+  if (e.target.id === "formation5"){
+        emptyDancer1.style.left = "calc(25% - 25px)";
+    emptyDancer1.style.top = "calc(30% - 25px)";
+    
+    currentSlide.appendChild(emptyDancer1);
+
+    emptyDancer2.style.left = "calc(75% - 25px)";
+    emptyDancer2.style.top = "calc(30% - 25px)";
+
+    currentSlide.appendChild(emptyDancer2);
+
+    emptyDancer3.style.left = "calc(10% - 25px)";
+    emptyDancer3.style.top = "calc(50% - 25px)";
+
+    currentSlide.appendChild(emptyDancer3);
+
+    emptyDancer4.style.left = "calc(40% - 25px)";
+    emptyDancer4.style.top = "calc(50% - 25px)";
+ 
+    currentSlide.appendChild(emptyDancer4);
+
+    emptyDancer5.style.left = "calc(60% - 25px)";
+    emptyDancer5.style.top = "calc(50% - 25px)";
+
+    currentSlide.appendChild(emptyDancer5);
+
+    emptyDancer6.style.left = "calc(90% - 25px)";
+    emptyDancer6.style.top = "calc(50% - 25px)";
+
+    currentSlide.appendChild(emptyDancer6);
+
+    emptyDancer7.style.left = "calc(25% - 25px)";
+    emptyDancer7.style.top = "calc(70% - 25px)";
+
+    currentSlide.appendChild(emptyDancer7);
+
+    emptyDancer8.style.left = "calc(75% - 25px)";
+    emptyDancer8.style.top = "calc(70% - 25px)";
+
+    currentSlide.appendChild(emptyDancer8);
+  }
+
+
+  // var formation = e.target.cloneNode(true);
+
+  // formation.style.width = "100%";
+  // formation.style.height = "100%";
+  // formation.style.position = "absolute";
+  // formation.style.left = "0";
+  // formation.style.top = "0";
+  // formation.style.display = "block";
+  // formation.style.zIndex = "20";
+  // currentSlide.appendChild(formation);
 })
 
 $('#next-btn').click(function(e){
@@ -541,6 +802,11 @@ $('#editButton').on('click', function(){
     $('#music').attr('disabled', true);
     document.getElementById('editButton').innerHTML = "Edit";
   }
+});
+
+$('#addDancer').click(function(){
+  // var name = $('#DancerName').modal();
+  // console.log(name);
 });
 
 $('#sidebar-toggle').click(function() {

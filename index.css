@@ -105,23 +105,23 @@ canvas {
 .body #content{
 	border: .25px dotted #454439;
 	background-color: #FFFFFF;
-	width: 525px; height: 375px;
+	width: 50%; height: 60%;
 	position: absolute;
 	left: 50%; top: 50%;
-  z-index: 20;
+  z-index: 15;
 	transform: translate(-50%, -50%);
 }
 .body #next-btn{
   position: absolute;
-  left: 75%; top: 50%;
-  z-index: 20;
+  left: 80%; top: 50%;
+  z-index: 15;
   transform: translate(-50%, -50%);
 }
 
 .body #previous-btn{
   position: absolute;
-  left: 25%; top: 50%;
-  z-index: 20;
+  left: 20%; top: 50%;
+  z-index: 15;
   transform: translate(-50%, -50%);
 }
 
@@ -293,8 +293,9 @@ content: "\f101";
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
-
 }
+
 td {
     vertical-align: middle;
+    text-align: center;
 }
