@@ -105,23 +105,23 @@ canvas {
 .body #content{
 	border: .25px dotted #454439;
 	background-color: #FFFFFF;
-	width: 50%; height: 60%;
+	width: 525px; height: 375px;
 	position: absolute;
 	left: 50%; top: 50%;
-  z-index: 15;
+  z-index: 20;
 	transform: translate(-50%, -50%);
 }
 .body #next-btn{
   position: absolute;
   left: 80%; top: 50%;
-  z-index: 15;
+  z-index: 20;
   transform: translate(-50%, -50%);
 }
 
 .body #previous-btn{
   position: absolute;
   left: 20%; top: 50%;
-  z-index: 15;
+  z-index: 20;
   transform: translate(-50%, -50%);
 }
 

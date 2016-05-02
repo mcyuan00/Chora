@@ -420,7 +420,7 @@ function makeNewFormation(){
   var div = document.createElement("div");
   div.style.width = "100%";
   div.style.height = "100%";
-  div.style.backgroundColor = "#none";
+  //div.style.backgroundColor = "#none";
   document.getElementById('content').appendChild(div);
   slides.push(div);
   currentSlide = div;
@@ -483,240 +483,282 @@ $(".formation").click(function(e){
 
   emptyDancer1.style.position = "absolute"
   emptyDancer1.style.display = "block";
-  emptyDancer1.style.zIndex = "20";
+  // emptyDancer1.style.zIndex = "20";
 
   emptyDancer2.style.position = "absolute"
   emptyDancer2.style.display = "block";
-  emptyDancer2.style.zIndex = "20";
+  // emptyDancer2.style.zIndex = "20";
 
   emptyDancer3.style.position = "absolute"
   emptyDancer3.style.display = "block";
-  emptyDancer3.style.zIndex = "20";
+  // emptyDancer3.style.zIndex = "20";
 
   emptyDancer4.style.position = "absolute"
   emptyDancer4.style.display = "block";
-  emptyDancer4.style.zIndex = "20";
+  // emptyDancer4.style.zIndex = "20";
 
   emptyDancer5.style.position = "absolute"
   emptyDancer5.style.display = "block";
-  emptyDancer5.style.zIndex = "20";
+  // emptyDancer5.style.zIndex = "20";
 
   emptyDancer6.style.position = "absolute"
   emptyDancer6.style.display = "block";
-  emptyDancer6.style.zIndex = "20";
+  // emptyDancer6.style.zIndex = "20";
 
   emptyDancer7.style.position = "absolute"
   emptyDancer7.style.display = "block";
-  emptyDancer7.style.zIndex = "20";
+  // emptyDancer7.style.zIndex = "20";
 
   emptyDancer8.style.position = "absolute"
   emptyDancer8.style.display = "block";
-  emptyDancer8.style.zIndex = "20";
+  // emptyDancer8.style.zIndex = "20";
 
   if (e.target.id === "formation1"){
 
-    emptyDancer1.style.left = "calc(20% - 25px)";
-    emptyDancer1.style.top = "calc(40% - 25px)";
+    emptyDancer1.style.left = "100px";
+    emptyDancer1.style.top = "200px";
+    emptyDancer1.style.transform = "translate(-50%, -50%)";
+
     
     currentSlide.appendChild(emptyDancer1);
 
-    emptyDancer2.style.left = "calc(50% - 25px)";
-    emptyDancer2.style.top = "calc(40% - 25px)";
+    emptyDancer2.style.left = "300px";
+    emptyDancer2.style.top = "400px";
+    emptyDancer2.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer2);
 
-    emptyDancer3.style.left = "calc(80% - 25px)";
-    emptyDancer3.style.top = "calc(40% - 25px)";
+    emptyDancer3.style.left = "500px";
+    emptyDancer3.style.top = "400px";
+    emptyDancer3.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer3);
 
-    emptyDancer4.style.left = "calc(10% - 25px)";
-    emptyDancer4.style.top = "calc(60% - 25px)";
+    emptyDancer4.style.left = "100px";
+    emptyDancer4.style.top = "300px";
+    emptyDancer4.style.transform = "translate(-50%, -50%)";
  
     currentSlide.appendChild(emptyDancer4);
 
-    emptyDancer5.style.left = "calc(30% - 25px)";
-    emptyDancer5.style.top = "calc(60% - 25px)";
+    emptyDancer5.style.left = "200px";
+    emptyDancer5.style.top = "300px";
+    emptyDancer5.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer5);
 
-    emptyDancer6.style.left = "calc(50% - 25px)";
-    emptyDancer6.style.top = "calc(60% - 25px)";
+    emptyDancer6.style.left = "300px";
+    emptyDancer6.style.top = "600px";
+    emptyDancer6.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer6);
 
-    emptyDancer7.style.left = "calc(90% - 25px)";
-    emptyDancer7.style.top = "calc(60% - 25px)";
+    emptyDancer7.style.left = "150px";
+    emptyDancer7.style.top = "200px";
+    emptyDancer7.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer7);
 
-    emptyDancer8.style.left = "calc(70% - 25px)";
-    emptyDancer8.style.top = "calc(60% - 25px)";
+    emptyDancer8.style.left = "450px";
+    emptyDancer8.style.top = "350px";
+    emptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer8);
 
 
   }
   if (e.target.id === "formation2"){
-    emptyDancer1.style.left = "calc(60% - 25px)";
-    emptyDancer1.style.top = "calc(30% - 25px)";
+    emptyDancer1.style.left = "60%";
+    emptyDancer1.style.top = "30%";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
     
     currentSlide.appendChild(emptyDancer1);
 
     emptyDancer2.style.left = "calc(60% - 25px)";
     emptyDancer2.style.top = "calc(45% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer2);
 
     emptyDancer3.style.left = "calc(60% - 25px)";
     emptyDancer3.style.top = "calc(60% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer3);
 
     emptyDancer4.style.left = "calc(40% - 25px)";
     emptyDancer4.style.top = "calc(45% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
  
     currentSlide.appendChild(emptyDancer4);
 
     emptyDancer5.style.left = "calc(40% - 25px)";
     emptyDancer5.style.top = "calc(60% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer5);
 
     emptyDancer6.style.left = "calc(40% - 25px)";
     emptyDancer6.style.top = "calc(75% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer6);
 
     emptyDancer7.style.left = "calc(80% - 25px)";
     emptyDancer7.style.top = "calc(45% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer7);
 
     emptyDancer8.style.left = "calc(20% - 25px)";
     emptyDancer8.style.top = "calc(60% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer8);
   }
   if (e.target.id === "formation3"){
     emptyDancer1.style.left = "calc(50% - 25px)";
     emptyDancer1.style.top = "calc(20% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
     
     currentSlide.appendChild(emptyDancer1);
 
     emptyDancer2.style.left = "calc(40% - 25px)";
     emptyDancer2.style.top = "calc(40% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer2);
 
     emptyDancer3.style.left = "calc(60% - 25px)";
     emptyDancer3.style.top = "calc(40% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer3);
 
     emptyDancer4.style.left = "calc(50% - 25px)";
     emptyDancer4.style.top = "calc(60% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
  
     currentSlide.appendChild(emptyDancer4);
 
     emptyDancer5.style.left = "calc(30% - 25px)";
     emptyDancer5.style.top = "calc(60% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer5);
 
     emptyDancer6.style.left = "calc(70% - 25px)";
     emptyDancer6.style.top = "calc(60% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer6);
 
     emptyDancer7.style.left = "calc(40% - 25px)";
-    emptyDancer7.style.top = "calc(80% - 25px)"
+    emptyDancer7.style.top = "calc(80% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
+
     currentSlide.appendChild(emptyDancer7);
 
     emptyDancer8.style.left = "calc(60% - 25px)";
     emptyDancer8.style.top = "calc(80% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer8);
   }
   if (e.target.id === "formation4"){
     emptyDancer1.style.left = "calc(25% - 25px)";
     emptyDancer1.style.top = "calc(30% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
     
     currentSlide.appendChild(emptyDancer1);
 
     emptyDancer2.style.left = "calc(75% - 25px)";
     emptyDancer2.style.top = "calc(30% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer2);
 
     emptyDancer3.style.left = "calc(10% - 25px)";
     emptyDancer3.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer3);
 
     emptyDancer4.style.left = "calc(40% - 25px)";
     emptyDancer4.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
  
     currentSlide.appendChild(emptyDancer4);
 
     emptyDancer5.style.left = "calc(60% - 25px)";
     emptyDancer5.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer5);
 
     emptyDancer6.style.left = "calc(90% - 25px)";
     emptyDancer6.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer6);
 
     emptyDancer7.style.left = "calc(25% - 25px)";
     emptyDancer7.style.top = "calc(70% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer7);
 
     emptyDancer8.style.left = "calc(75% - 25px)";
     emptyDancer8.style.top = "calc(70% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer8);
   }
   if (e.target.id === "formation5"){
         emptyDancer1.style.left = "calc(25% - 25px)";
     emptyDancer1.style.top = "calc(30% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
     
     currentSlide.appendChild(emptyDancer1);
 
     emptyDancer2.style.left = "calc(75% - 25px)";
     emptyDancer2.style.top = "calc(30% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer2);
 
     emptyDancer3.style.left = "calc(10% - 25px)";
     emptyDancer3.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer3);
 
     emptyDancer4.style.left = "calc(40% - 25px)";
     emptyDancer4.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
  
     currentSlide.appendChild(emptyDancer4);
 
     emptyDancer5.style.left = "calc(60% - 25px)";
     emptyDancer5.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer5);
 
     emptyDancer6.style.left = "calc(90% - 25px)";
     emptyDancer6.style.top = "calc(50% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer6);
 
     emptyDancer7.style.left = "calc(25% - 25px)";
     emptyDancer7.style.top = "calc(70% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer7);
 
     emptyDancer8.style.left = "calc(75% - 25px)";
     emptyDancer8.style.top = "calc(70% - 25px)";
+    mptyDancer8.style.transform = "translate(-50%, -50%)";
 
     currentSlide.appendChild(emptyDancer8);
   }
@@ -804,10 +846,11 @@ $('#editButton').on('click', function(){
   }
 });
 
-$('#addDancer').click(function(){
-  // var name = $('#DancerName').modal();
-  // console.log(name);
-});
+function addDancer(){
+  console.log("yay");
+  var name = $('#DancerName').val();
+  console.log(name);
+}
 
 $('#sidebar-toggle').click(function() {
   var sidebar = document.querySelector('.sidebar');
