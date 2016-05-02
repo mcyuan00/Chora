@@ -14,13 +14,19 @@ $(document).ready(function() {
   var playButton = document.getElementById("play");
   playButton.onclick=function(){
     wavesurfer.playPause();
-  }
+  } 
 
+  var initials = [];
   $("#form_part1").submit(function(e){
-    var dancer = document.forms["form_part1"]["dancer_name"].value;
+    var firstName = document.forms["form_part1"]["dancer_name_first"].value;
+    var lastName = document.forms["form_part1"]["dancer_name_last"].value;
+    initials = firstName.substring(0,1).toUpperCase() + lastName.substring(0,1).toUpperCase();
+
+    document.getElementById('menu').appendChild(createDancer(initials));
+
     var tr = document.createElement("tr");
     var td = document.createElement("td");
-    td.innerHTML = dancer;
+    td.innerHTML = firstName + " " + lastName;
     tr.appendChild(td);
 
     var table = document.getElementById("dancer_table");
