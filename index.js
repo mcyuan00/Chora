@@ -16,19 +16,31 @@ $(document).ready(function() {
     wavesurfer.playPause();
   }
 
+  $("#form_part1").submit(function(e){
+    var dancer = document.forms["form_part1"]["dancer_name"].value;
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    td.innerHTML = dancer;
+    tr.appendChild(td);
+
+    var table = document.getElementById("dancer_table");
+    table.appendChild(tr);
+    $("#new_dancer_modal").modal('hide');
+    return false;
+  });
+
   var slides = [], currentSlide = null; slideNum = 0, x = 0, y = 0;
   var visible = [], currentPlotted = [];
 
-var selected = null, // Object of the element to be moved
+  var selected = null, // Object of the element to be moved
     x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
     x_elem = 0, y_elem = 0; // Stores top, left values (edge) of the element
     x_pos_original = 0, y_pos_original = 0; //position to return to if out of bounds
 
-if(currentSlide === null){
-  var div = document.getElementById("content");
-  div.style.backgroundColor = "d3d3d3";
-}
-
+  if(currentSlide === null){
+    var div = document.getElementById("content");
+    div.style.backgroundColor = "d3d3d3";
+  }
 
 
 // Will be called when user starts dragging an element

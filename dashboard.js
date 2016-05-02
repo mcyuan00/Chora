@@ -17,18 +17,24 @@ $(document).ready(function() {
         var button = document.createElement("button");
         button.classname = "project_button";
         var p = document.createElement("p");
-        var node = document.createTextNode(projectTitle + "<br>" + filename + "<br>" + numDancers +" dancers");
-        p.appendChild(node);
+        p.appendChild(document.createTextNode(projectTitle));
+        p.appendChild(document.createElement('br'))
+        p.appendChild(document.createTextNode(filename));
+        p.appendChild(document.createElement('br'))
+        p.appendChild(document.createTextNode(numDancers + " dancers"));
         div.appendChild(button);
         div.appendChild(p);
 
         var first = document.getElementById("first");
         document.getElementById("columns").insertBefore(div, first);
+        $("#new_project_modal").modal('hide');
+        return false;
     });
 
 
     $("#numDancers").change(function(e){
         var value = $("#numDancers").val();
+        $(".new_dancer").remove();
         addDancerInfo(value);
         console.log(value);
     })
@@ -41,6 +47,8 @@ $(document).ready(function() {
     function addDancerInfo(numDancers){
       for(i = 0; i< numDancers; i++){
 
+        var container = document.createElement('div');
+        container.className = "new_dancer"
         var name = document.createElement("fieldset");
         var name_label = document.createElement("label");
         name_label.innerHTML = "Dancer Name (" + (i+1) + ")";
@@ -51,6 +59,7 @@ $(document).ready(function() {
         name_input.placeholder = "First, Last";
         name.appendChild(name_label);
         name.appendChild(name_input);
+        container.appendChild(name);
 
         var info = document.createElement("fieldset");
         var info_label = document.createElement("label");
@@ -61,11 +70,11 @@ $(document).ready(function() {
         info_text.rows = 3;
         info.appendChild(info_label);
         info.appendChild(info_text);
+        container.appendChild(info);
 
 
         var submit = document.getElementById("submit_button");
-        document.getElementById("form_part1").insertBefore(name, submit);
-        document.getElementById("form_part1").insertBefore(info, submit);
+        document.getElementById("form_part1").insertBefore(container, submit);
         console.log("success");
       }
       $("input").prop('required',true);
