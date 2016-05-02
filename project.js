@@ -124,7 +124,7 @@ document.onmousedown = function (e) {
     }
     else if(e.target.className == "placed" || e.target.className == "emptyDancer"){
       _drag_init(e.target);
-      console.log("hit");
+      //console.log("hit");
       return false;
   } 
 };
@@ -313,7 +313,7 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
         }
       }
       currentPlotted.push(e.target.children[0].innerHTML);
-      console.log(currentPlotted);
+      //console.log(currentPlotted);
       currentDancer = null;
       dancerFinal.style.position = "absolute";
       document.getElementById("menu").style.display = "none";
@@ -423,68 +423,177 @@ function isInArray(value, array) {
 $('#newFormation').click(makeNewFormation);
 $('#newTransition').click(makeNewTransition);
 
-function makeNewFormation(){
-  var background = document.getElementById("content");
-  background.style.backgroundColor = "white";
-  canvases.push([]);
-  targetPairs.push(new Array());
-  fromPlotted.push([]);
-  document.getElementById('menu').style.display = "none";
-  if (slides.length > 0) {
-    for (var i = 0; i < slides.length; ++i) {
-      slides[i].style.display = "none";
-      }
-  };
-  var div = document.createElement("div");
-  div.style.width = "100%";
-  div.style.height = "100%";
-  //div.style.backgroundColor = "#none";
-  document.getElementById('content').appendChild(div);
-  slides.push(div);
-  currentSlide = div;
-  slideNum += 1;
-  currentPlotted = [];
-  visible.push(currentPlotted);
-  $('#menu').children().each( function() {
-    this.style.display = "initial";
-  });
-};
+function redoOrderList(list, insertSlide, insertIndex) {
+  var firstHalfArray = list.slice(0, insertIndex);
+  var lastHalfArray = list.slice(insertIndex+1, list.length);
+  var firstConcat = firstHalfArray.concat(insertSlide);
+  list = firstConcat.concat(lastHalfArray);
+}
 
- function makeNewTransition() {
+function makeNewFormation(){
+  if (slideNum === slides.length) {
+    var background = document.getElementById("content");
+    background.style.backgroundColor = "white";
     canvases.push([]);
     targetPairs.push(new Array());
     fromPlotted.push([]);
     document.getElementById('menu').style.display = "none";
-   if (slides.length > 0) {
+    if (slides.length > 0) {
       for (var i = 0; i < slides.length; ++i) {
         slides[i].style.display = "none";
-      }
+        }
     };
     var div = document.createElement("div");
     div.style.width = "100%";
     div.style.height = "100%";
-    div.className = "transition";
-    var previousFormation = currentSlide; //copy of previous formation
-    var transition = previousFormation.cloneNode(true);
-    transition.style.display = "block";
-    var children = transition.childNodes;
-    for (var i = 0; i <children.length; ++i)
-      children[i].style.opacity = ".4";
-    div.appendChild(transition);
-
-    document.getElementById("content").appendChild(div);
+    //div.style.backgroundColor = "#none";
+    document.getElementById('content').appendChild(div);
     slides.push(div);
     currentSlide = div;
     slideNum += 1;
-    visible.push([]);
-    console.log(currentPlotted);
+    currentPlotted = [];
+    visible.push(currentPlotted);
     $('#menu').children().each( function() {
-      if(isInArray(this.children[0].innerHTML, currentPlotted )){
-        this.style.display = "none";
-      } else {
-        this.style.display = "initial"; //makes visible
-      }
+      this.style.display = "initial";
     });
+  } else if (slides.length >= 2) {
+    var currentIndex = slides.indexOf(currentSlide);
+    var background = document.getElementById("content");
+    background.style.backgroundColor = "white";
+
+    var firstHalfArray = canvases.slice(0, currentIndex+1);
+    var lastHalfArray = canvases.slice(currentIndex+1, canvases.length);
+    firstHalfArray.push([]);
+    canvases = firstHalfArray.concat(lastHalfArray);
+
+    var firstHalfArray = targetPairs.slice(0, currentIndex+1);
+    var lastHalfArray = targetPairs.slice(currentIndex+1, targetPairs.length);
+    var firstConcat = firstHalfArray.concat([new Array()]);
+    targetPairs = firstConcat.concat(lastHalfArray);
+
+    var firstHalfArray = fromPlotted.slice(0, currentIndex+1);
+    var lastHalfArray = fromPlotted.slice(currentIndex+1, fromPlotted.length);
+    firstHalfArray.push([]);
+    fromPlotted = firstHalfArray.concat(lastHalfArray);
+
+    document.getElementById('menu').style.display = "none";
+    if (slides.length > 0) {
+      for (var i = 0; i < slides.length; ++i) {
+        slides[i].style.display = "none";
+        }
+    };
+    var div = document.createElement("div");
+    div.style.width = "100%";
+    div.style.height = "100%";
+    document.getElementById('content').appendChild(div);
+    
+    var firstHalfArray = slides.slice(0, currentIndex+1);
+    var lastHalfArray = slides.slice(currentIndex+1, slides.length);
+    var firstConcat = firstHalfArray.concat([div]);
+    slides = firstConcat.concat(lastHalfArray);
+
+    currentSlide = div;
+    slideNum = currentIndex + 2;
+    currentPlotted = [];
+    visible.push(currentPlotted);
+    $('#menu').children().each( function() {
+      this.style.display = "initial";
+    });
+  }
+};
+
+ function makeNewTransition() {
+    if (slideNum === slides.length) {
+      canvases.push([]);
+      targetPairs.push(new Array());
+      fromPlotted.push([]);
+      document.getElementById('menu').style.display = "none";
+     if (slides.length > 0) {
+        for (var i = 0; i < slides.length; ++i) {
+          slides[i].style.display = "none";
+        }
+      };
+      var div = document.createElement("div");
+      div.style.width = "100%";
+      div.style.height = "100%";
+      div.className = "transition";
+      var previousFormation = currentSlide; //copy of previous formation
+      var transition = previousFormation.cloneNode(true);
+      transition.style.display = "block";
+      var children = transition.childNodes;
+      for (var i = 0; i <children.length; ++i)
+        children[i].style.opacity = ".4";
+      div.appendChild(transition);
+
+      document.getElementById("content").appendChild(div);
+      slides.push(div);
+      currentSlide = div;
+      slideNum += 1;
+      visible.push([]);
+      $('#menu').children().each( function() {
+        if(isInArray(this.children[0].innerHTML, currentPlotted )){
+          this.style.display = "none";
+        } else {
+          this.style.display = "initial"; //makes visible
+        }
+      });
+    } else if (slides.length >= 2) {
+      var currentIndex = slides.indexOf(currentSlide);
+
+      var firstHalfArray = canvases.slice(0, currentIndex+1);
+      var lastHalfArray = canvases.slice(currentIndex+1, canvases.length);
+      firstHalfArray.push([]);
+      canvases = firstHalfArray.concat(lastHalfArray);
+
+      var firstHalfArray = targetPairs.slice(0, currentIndex+1);
+      var lastHalfArray = targetPairs.slice(currentIndex+1, targetPairs.length);
+      var firstConcat = firstHalfArray.concat([new Array()]);
+      targetPairs = firstConcat.concat(lastHalfArray);
+
+      var firstHalfArray = fromPlotted.slice(0, currentIndex+1);
+      var lastHalfArray = fromPlotted.slice(currentIndex+1, fromPlotted.length);
+      firstHalfArray.push([]);
+      fromPlotted = firstHalfArray.concat(lastHalfArray);
+
+      document.getElementById('menu').style.display = "none";
+     if (slides.length > 0) {
+        for (var i = 0; i < slides.length; ++i) {
+          slides[i].style.display = "none";
+        }
+      };
+      var div = document.createElement("div");
+      div.style.width = "100%";
+      div.style.height = "100%";
+      div.className = "transition";
+      var previousFormation = currentSlide; //copy of previous formation
+      var transition = previousFormation.cloneNode(true);
+      transition.style.display = "block";
+      var children = transition.childNodes;
+      for (var i = 0; i <children.length; ++i)
+        children[i].style.opacity = ".4";
+      div.appendChild(transition);
+      document.getElementById("content").appendChild(div);
+
+      var firstHalfArray = slides.slice(0, currentIndex+1);
+      var lastHalfArray = slides.slice(currentIndex+1, slides.length);
+      var firstConcat = firstHalfArray.concat([div]);
+      slides = firstConcat.concat(lastHalfArray);
+
+      //slides.push(div);
+      currentSlide = div;
+      slideNum = currentIndex + 2;
+
+      visible.push([]);
+      $('#menu').children().each( function() {
+        if(isInArray(this.children[0].innerHTML, currentPlotted )){
+          this.style.display = "none";
+        } else {
+          this.style.display = "initial"; //makes visible
+        }
+      });
+
+
+    }
   };
 
 /*create a formation from template*/
@@ -846,7 +955,7 @@ $('#previous-btn').click(function(e){
 
 var dancerEditing = false; 
 $('#editButton').on('click', function(){
-  console.log('hit')
+  //console.log('hit')
   if(!dancerEditing){
     dancerEditing = true;
     $('#danceTitle').removeAttr('readonly');
@@ -865,9 +974,9 @@ $('#editButton').on('click', function(){
 });
 
 function addDancer(){
-  console.log("yay");
+  //console.log("yay");
   var name = $('#DancerName').val();
-  console.log(name);
+  //console.log(name);
 }
 
 $('#sidebar-toggle').click(function() {
