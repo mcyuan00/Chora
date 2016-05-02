@@ -72,15 +72,17 @@
                     
                     <button id = "addDancer" button type="button" data-toggle="modal" data-target="#new_dancer_modal" data-backdrop = "true">Add Dancer</button>
                     <table class="table">
-                    <tr>
-                        <td>Jennifer Lopez</td>
-                    </tr>
-                    <tr>
-                        <td>Chris Brown</td>
-                    </tr>
-                    <tr>
-                        <td>Janet Jackson</td>
-                    </tr>
+                        <tbody id = "dancer_table"> 
+                            <tr id = "first">
+                                <td>Jennifer Lopez</td>
+                            </tr>
+                            <tr>
+                                <td>Chris Brown</td>
+                            </tr>
+                            <tr>
+                                <td>Janet Jackson</td>
+                            </tr>
+                        </tbody>
                     </table>
                     
                 </div>
@@ -176,7 +178,7 @@
                 <form id = "form_part1" name = "form_part1">
                   <fieldset class="form-group">
                     <label for="dancerName">Dancer Name</label>
-                    <input type="text" class="form-control" id="DancerName" name ="DancerName" placeholder="First, Last" required>
+                    <input type="text" class="form-control" id="dancer_name" name ="dancer_name" placeholder="First, Last" required>
                   </fieldset>
                   <fieldset class="form-group">
                     <label for="dancerInfo">Dancer Info</label>
