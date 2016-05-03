@@ -23,6 +23,7 @@ $(document).ready(function() {
     initials = firstName.substring(0,1).toUpperCase() + lastName.substring(0,1).toUpperCase();
 
     document.getElementById('menu').appendChild(createDancer(initials));
+    document.getElementById('menu').style.width = $('#menu').width() + 60 + "px";
 
     var tr = document.createElement("tr");
     var td = document.createElement("td");
