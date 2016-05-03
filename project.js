@@ -230,11 +230,11 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
       else if ((event.target.className == "emptyDancer"|| event.target.className == "placed") && !wasDragged) {
       if (!menuOpen){
         document.getElementById('colorMenu').style.display = "none";
-        document.getElementById('menu').style.display = "inline-block";
-        document.getElementById('menu').style.position = "relative";
+        document.getElementById('menu').style.display = "block";
+        document.getElementById('menu').style.position = "absolute";
         document.getElementById('menu').style.left = event.target.style.left;
         document.getElementById('menu').style.top = event.target.style.top;
-        document.getElementById('menu').style.transform = "translate(-50%, -175%)";
+        document.getElementById('menu').style.transform = "translate(-50%,-175%)";
 
         document.getElementById('trash').style.display = "initial";
         document.getElementById('trash').style.position = "absolute";
@@ -248,8 +248,8 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
         document.getElementById('menu').style.display = "none";
         document.getElementById('trash').style.display = "none";
         menuOpen = false;
-        document.getElementById('colorMenu').style.display = "inline-block";
-        document.getElementById('colorMenu').style.position = "relative";
+        document.getElementById('colorMenu').style.display = "block";
+        document.getElementById('colorMenu').style.position = "absolute";
         document.getElementById('colorMenu').style.left = event.target.style.left;
         document.getElementById('colorMenu').style.top = event.target.style.top;
         document.getElementById('colorMenu').style.transform = "translate(-50%, -175%)";
@@ -305,6 +305,8 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
         $('#menu').children().each( function() {
           if( this.children[0].innerHTML == nameVisible){
             this.style.display = "initial";
+            document.getElementById('menu').style.width = $('#menu').width() + 60 + "px";
+            console.log("hit");
           };
         });
         var index = currentPlotted.indexOf(nameVisible);
@@ -318,6 +320,8 @@ var from = null, to = null, canvas = null, redraw = new Array(), redo = false;
       dancerFinal.style.position = "absolute";
       document.getElementById("menu").style.display = "none";
       placeDancer.style.display = "none";
+      document.getElementById('menu').style.width = $('#menu').width() - 60 + "px";
+      console.log($('#menu').width());
     } 
   });
 
