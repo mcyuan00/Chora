@@ -130,7 +130,7 @@ canvas {
   width: 525px; height: 375px;
   /*position: absolute;*/
 /*  left: 15%; top: 50%;*/
-  z-index: 20;
+  z-index: -20;
   /*transform: translate(-50%, -50%);*/
 }
 
@@ -141,7 +141,7 @@ canvas {
   width: 525px; height: 375px;
   /*position: absolute;*/
 /*  left: 75%; top: 50%;*/
-  z-index: 20;
+  z-index: -20;
   /*transform: translate(-50%, -50%);*/
 }
 
@@ -235,6 +235,7 @@ body {
 }
 
 #sidebar-toggle {
+  position: fixed;
   z-index: 40;
 }
 
@@ -243,7 +244,6 @@ body {
   width: 50px;
   height: 100%;
   background-color: #f2f2f2;
-  z-index: 10px;
 }
 .sidebar.maximized {
   width: 250px;
@@ -302,6 +302,7 @@ content: "\f101";
 
 .tab-content {
   margin-left: 0px;
+  position: fixed;
   z-index: 40;
 }
 .tab-content .tab-pane {
@@ -340,13 +341,18 @@ td {
 
 #main {
   position: absolute;
-  display: block;
+  /*display: block;*/
   width: 525px;
   height: 375px;
-  left: 50%; top: 50%;
-  margin-right: auto;
-  margin-left: auto;
+  left: 50%; top: 46%;
+  /*margin-right: auto;
+  margin-left: auto;*/
   transform: translate(-50%, -50%);
+}
+
+.slides {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 #buttons {
