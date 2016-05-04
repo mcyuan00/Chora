@@ -728,7 +728,14 @@ $('body').click(function() {
   displayGhost();
 });
 
-
+window.onkeydown = function(e){
+  var code = e.keyCode ? e.keyCode : e.which;
+    if (code === 37) { //up key
+      $('#previous-btn').click();
+    } else if (code === 39) { //down key
+      $("#next-btn").click();
+    }
+};
 
 /*create a formation from template*/
 $(".formation").click(function(e){
