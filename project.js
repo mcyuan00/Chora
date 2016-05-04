@@ -649,8 +649,8 @@ function displayPreviousGhost(){
 
     previousSlide.style.display = "block";
     previousSlide.style.position = "absolute";
-    previousSlide.style.height = "75px";
-    previousSlide.style.width="105px"
+    previousSlide.style.height = "375px";
+    previousSlide.style.width="525px"
 
     var nodes = previousSlide.childNodes;
 
@@ -665,10 +665,10 @@ function displayPreviousGhost(){
           var nodeTop = parseFloat(childnodes[j].style.top);
           var nodeLeft = parseFloat(childnodes[j].style.left);
       
-          childnodes[j].style.height = nodeHeight * .2 + "px";
-          childnodes[j].style.width = nodeWidth * .2 + "px";
-          childnodes[j].style.top = nodeTop * .2 + "px";
-          childnodes[j].style.left = nodeLeft * .2 + "px";
+          childnodes[j].style.height = nodeHeight + "px";
+          childnodes[j].style.width = nodeWidth + "px";
+          childnodes[j].style.top = nodeTop + "px";
+          childnodes[j].style.left = nodeLeft + "px";
         }
       }
 
@@ -677,10 +677,10 @@ function displayPreviousGhost(){
       var nodeTop = parseFloat(nodes[i].style.top);
       var nodeLeft = parseFloat(nodes[i].style.left);
       
-      nodes[i].style.height = nodeHeight * .2 + "px";
-      nodes[i].style.width = nodeWidth * .2 + "px";
-      nodes[i].style.top = nodeTop * .2 + "px";
-      nodes[i].style.left = nodeLeft * .2 + "px";
+      nodes[i].style.height = nodeHeight + "px";
+      nodes[i].style.width = nodeWidth + "px";
+      nodes[i].style.top = nodeTop + "px";
+      nodes[i].style.left = nodeLeft + "px";
     }
     document.getElementById("previous-ghost-slide").appendChild(previousSlide);
   } 
@@ -700,8 +700,8 @@ function displayNextGhost(){
 
     nextSlide.style.display = "block";
     nextSlide.style.position = "absolute";
-    nextSlide.style.height = "75px";
-    nextSlide.style.width="105px"
+    nextSlide.style.height = "375px";
+    nextSlide.style.width="525px"
     var nextnodes = nextSlide.childNodes;
 
     for(var i=0; i<nextnodes.length; i++) {
@@ -715,10 +715,10 @@ function displayNextGhost(){
           var nextnodeTop = parseFloat(childnextnodes[j].style.top);
           var nextnodeLeft = parseFloat(childnextnodes[j].style.left);
       
-          childnextnodes[j].style.height = nextnodeHeight * .2 + "px";
-          childnextnodes[j].style.width = nextnodeWidth * .2 + "px";
-          childnextnodes[j].style.top = nextnodeTop * .2 + "px";
-          childnextnodes[j].style.left = nextnodeLeft * .2 + "px";
+          childnextnodes[j].style.height = nextnodeHeight + "px";
+          childnextnodes[j].style.width = nextnodeWidth + "px";
+          childnextnodes[j].style.top = nextnodeTop + "px";
+          childnextnodes[j].style.left = nextnodeLeft + "px";
         }
       }
 
@@ -727,10 +727,10 @@ function displayNextGhost(){
       var nextnodeTop = parseFloat(nextnodes[i].style.top);
       var nextnodeLeft = parseFloat(nextnodes[i].style.left);
       
-      nextnodes[i].style.height = nextnodeHeight * .2 + "px";
-      nextnodes[i].style.width = nextnodeWidth * .2 + "px";
-      nextnodes[i].style.top = nextnodeTop * .2 + "px";
-      nextnodes[i].style.left = nextnodeLeft * .2 + "px";
+      nextnodes[i].style.height = nextnodeHeight + "px";
+      nextnodes[i].style.width = nextnodeWidth + "px";
+      nextnodes[i].style.top = nextnodeTop + "px";
+      nextnodes[i].style.left = nextnodeLeft + "px";
     }
     document.getElementById("next-ghost-slide").appendChild(nextSlide);
   }
