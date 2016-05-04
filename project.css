@@ -117,10 +117,10 @@ canvas {
 	border: .25px dotted #454439;
 	background-color: #FFFFFF;
 	width: 525px; height: 375px;
-	position: absolute;
-	left: 45%; top: 50%;
+	position: relative;
+/*	left: 45%; top: 50%;*/
   z-index: 20;
-	transform: translate(-50%, -50%);
+	/*transform: translate(-50%, -50%);*/
 }
 
 .body #previous-ghost-slide{
@@ -128,10 +128,10 @@ canvas {
   background-color: #FFFFFF;
   opacity: 0.3;
   width: 525px; height: 375px;
-  position: absolute;
-  left: 15%; top: 50%;
+  /*position: absolute;*/
+/*  left: 15%; top: 50%;*/
   z-index: 20;
-  transform: translate(-50%, -50%);
+  /*transform: translate(-50%, -50%);*/
 }
 
 .body #next-ghost-slide{
@@ -139,24 +139,24 @@ canvas {
   background-color: #FFFFFF;
   opacity: 0.3;
   width: 525px; height: 375px;
-  position: absolute;
-  left: 75%; top: 50%;
+  /*position: absolute;*/
+/*  left: 75%; top: 50%;*/
   z-index: 20;
-  transform: translate(-50%, -50%);
+  /*transform: translate(-50%, -50%);*/
 }
 
-.body #next-btn{
+#next-btn{
   position: absolute;
-  left: 68%; top: 50%;
-  z-index: 20;
-  transform: translate(-50%, -50%);
-}
-
-.body #previous-btn{
-  position: absolute;
-  left: 22%; top: 50%;
+  left: calc(50% + 262.5px);
   z-index: 30;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 50%);
+}
+
+#previous-btn{
+  position: absolute;
+  left: calc(50% - 262.5px);
+  z-index: 30;
+  transform: translate(-50%, 50%);
 }
 
 .body #waveform{
@@ -234,6 +234,10 @@ body {
   /*background-color: #e4e6e9;*/
 }
 
+#sidebar-toggle {
+  z-index: 40;
+}
+
 .sidebar {
   float: right;
   width: 50px;
@@ -298,7 +302,7 @@ content: "\f101";
 
 .tab-content {
   margin-left: 0px;
-  z-index: 20;
+  z-index: 40;
 }
 .tab-content .tab-pane {
   display: none;
@@ -332,4 +336,25 @@ content: "\f101";
 td {
     vertical-align: middle;
     text-align: center;
+}
+
+#main {
+  position: absolute;
+  display: block;
+  width: 525px;
+  height: 375px;
+  left: 50%; top: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  transform: translate(-50%, -50%);
+}
+
+#buttons {
+  postition: absolute;
+  display: block;
+  top: 70%;
+  left: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translate(-50%, -50%);
 }

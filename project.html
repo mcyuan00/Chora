@@ -68,12 +68,10 @@
                 </div>
                 <div class="tab-pane" id="b">
                     <h2>Dancers</h2>
-                    
-                    
-                    <button id = "addDancer" button type="button" data-toggle="modal" data-target="#new_dancer_modal" data-backdrop = "true">Add Dancer</button>
+                    <button id="addDancer" button type="button" data-toggle="modal" data-target="#new_dancer_modal" data-backdrop="true">Add Dancer</button>
                     <table class="table">
-                        <tbody id = "dancer_table"> 
-                            <tr id = "first">
+                        <tbody id="dancer_table">
+                            <tr id="first">
                                 <td>Jennifer Lopez</td>
                             </tr>
                             <tr>
@@ -84,7 +82,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    
                 </div>
                 <div class="tab-pane" id="c">
                     <h2>Settings</h2>
@@ -109,106 +106,100 @@
                         </fieldset>
                         <fieldset class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control" id="description" rows="3" placeholder = "Describe your dance" readonly></textarea>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Describe your dance" readonly></textarea>
                         </fieldset>
                         <fieldset class="form-group">
                             <label for="music">Music Upload</label>
                             <input type="file" class="form-control-file" id="music" disabled>
-                            <small id = "currentMusic" class="text-muted">Current: Roses.mp3</small>
+                            <small id="currentMusic" class="text-muted">Current: Roses.mp3</small>
                         </fieldset>
-
                     </form>
-                    <button id = "editButton">Edit</button>
+                    <button id="editButton">Edit</button>
                 </div>
             </div>
             <!-- /tab-content -->
         </div>
         <!-- /tabbable -->
-        <a id = "sidebar-toggle" class="angle icon-double-angle-left"></a>
+        <a id="sidebar-toggle" class="angle icon-double-angle-left"></a>
     </div>
     <!--ending sidebar -->
     <div class="body">
         <!-- <div id="content"> <div id = "menu"></div> </div> -->
-        <table>
+        <table id="main">
+            <col widith="525">
+            <col width="525">
+            <col width="525">
             <tr>
-                <td>
-                    <div class=".col-md-1" id="previous-slide">
-                        <button class="btn btn-default" id="previous-btn" type="button"><span class="glyphicon glyphicon-chevron-left"></span></button>
-                    </div>
-                </td>
                 <td>
                     <div id="previous-ghost-slide">
                     </div>
                 </td>
                 <td>
                     <div id="content">
-                        <div id = "menu"></div>
-                        <div id = "trash" width = "50px" height = "50px"><span class = "glyphicon glyphicon-trash"></span></div>
-                        <div id = "colorMenu"></div>
+                        <div id="menu"></div>
+                        <div id="trash" width="50px" height="50px"><span class="glyphicon glyphicon-trash"></span></div>
+                        <div id="colorMenu"></div>
+                    </div>
+                    <div>
+                        <div class=".col-md-1" id="previous-slide">
+                            <button class="btn btn-default" id="previous-btn" type="button"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                        </div>
+                        <div class=".col-md-1" id="next-slide">
+                            <button class="btn btn-default" id="next-btn" type="button"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                        </div>
                     </div>
                 </td>
                 <td>
                     <div id="next-ghost-slide">
                     </div>
                 </td>
-                <td>
-                    <div class=".col-md-1" id="next-slide">
-                        <button class="btn btn-default" id="next-btn" type="button"><span class="glyphicon glyphicon-chevron-right"></span></button>
-                    </div>
-                </td>
             </tr>
         </table>
-
-        <div id = "playbutton">
+        <div id="playbutton">
             <button id="play" class="btn btn-primary">
-                <i class="glyphicon glyphicon-play"></i>
-                Play
-              </button>
+                <i class="glyphicon glyphicon-play"></i> Play
+            </button>
         </div>
-            <div id="waveform"></div> 
-            <canvas id= "timestamps" width="1000" height="80"></canvas>
+        <div id="waveform"></div>
+        <canvas id="timestamps" width="1000" height="80"></canvas>
     </div>
-
-
-       <div class = "container">
-    <!-- Modal -->
-    <div id="new_dancer_modal" class="modal fade" role="dialog">
-      <div class="modal-dialog ">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add Dancer</h4>
-          </div>
-          <div class="modal-body">
-            <div class = "row">
-              <div class = "form col-md-11">
-                <form id = "form_part1" name = "form_part1">
-                  <fieldset class="form-group">
-                    <label for="dancerName">Dancer First Name</label>
-                    <input type="text" class="form-control" id="dancer_name_first" name ="dancer_name_first" placeholder="First Name" required>
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <label for="dancerName">Dancer Last Name</label>
-                    <input type="text" class="form-control" id="dancer_name_last" name ="dancer_name_last" placeholder="Last Name" required>
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <label for="dancerInfo">Dancer Info</label>
-                    <textarea class="form-control" id="dancerInfo" name= "dancerInfo" row = 3 required></textarea>
-                  </fieldset>
-                  <button type="submit" class="btn btn-primary" id = "submit_button" >Submit</button>
-                </form>
-              </div>
+    <div class="container">
+        <!-- Modal -->
+        <div id="new_dancer_modal" class="modal fade" role="dialog">
+            <div class="modal-dialog ">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Dancer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form col-md-11">
+                                <form id="form_part1" name="form_part1">
+                                    <fieldset class="form-group">
+                                        <label for="dancerName">Dancer First Name</label>
+                                        <input type="text" class="form-control" id="dancer_name_first" name="dancer_name_first" placeholder="First Name" required>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label for="dancerName">Dancer Last Name</label>
+                                        <input type="text" class="form-control" id="dancer_name_last" name="dancer_name_last" placeholder="Last Name" required>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <label for="dancerInfo">Dancer Info</label>
+                                        <textarea class="form-control" id="dancerInfo" name="dancerInfo" row=3 required></textarea>
+                                    </fieldset>
+                                    <button type="submit" class="btn btn-primary" id="submit_button">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
         </div>
-
-      </div>
-   </div> 
 </body>
 
 </html>
