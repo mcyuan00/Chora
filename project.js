@@ -508,6 +508,8 @@ function makeNewFormation(){
     });
     document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
   }
+
+  drawTimeStamps();
 };
 
  function makeNewTransition() {
@@ -1184,6 +1186,49 @@ var tabsFn = (function() {
   $(init);
 })();
 
+
+  var drawTimeStamps = function(){
+    console.log("timestamp");        // create a new line object
+    var canvas=document.getElementById("timestamps");
+    var ctx=canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (i = 1; i < slides.length+1; i++){
+      yFrom = 0;
+      yTo = 15;
+      xFrom = 20*i+ 0.5;
+      xTo = 20*i + 0.5;
+
+      ctx.beginPath();
+      ctx.moveTo(xFrom,yFrom);
+      ctx.lineTo(xTo,yTo);
+      ctx.stroke();
+
+      // function Line(x1,y1,x2,y2){
+      //   this.x1=x1;
+      //   this.y1=y1;
+      //   this.x2=x2;
+      //   this.y2=y2;
+      // }
+
+      // Line.prototype.drawLine=function(ctx){
+      //   // arbitrary styling
+      //   ctx.strokeStyle="black";
+      //   ctx.fillStyle="black";
+      //   ctx.lineWidth=1;
+        
+      //   // draw the line
+      //   ctx.beginPath();
+      //   ctx.moveTo(this.x1,this.y1);
+      //   ctx.lineTo(this.x2,this.y2);
+      //   ctx.stroke();
+      //   }
+      //   // create a new line object
+      //   var line=new Line(xTo,yTo,xFrom,yFrom);
+      //   // draw the line
+      //   line.drawLine(context);
+    }
+  }
 
 
 }); //end of document ready 
