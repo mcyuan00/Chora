@@ -618,9 +618,10 @@ function makeNewFormation(){
     }
   };
 
-displayGhost();
+displayPreviousGhost();
+displayNextGhost();
 
-function displayGhost(){
+function displayPreviousGhost(){
   document.getElementById("previous-ghost-slide").innerHTML = "";
   document.getElementById("next-ghost-slide").innerHTML = "";
   var currentIndex = slides.indexOf(currentSlide);
@@ -632,7 +633,10 @@ function displayGhost(){
   if (currentIndex <= 0){
 
     $("#previous-ghost-slide").css("background-color", "d3d3d3");
-    $('#next-ghost-slide').css("background-color", "d3d3d3");
+    //$('#next-ghost-slide').css("background-color", "d3d3d3");
+    if (currentIndex >= slides.length - 1) {
+      $('#next-ghost-slide').css("background-color", "d3d3d3");
+    }
 
   } else {
     
@@ -677,8 +681,16 @@ function displayGhost(){
       nodes[i].style.left = nodeLeft * .2 + "px";
     }
     document.getElementById("previous-ghost-slide").appendChild(previousSlide);
+  } 
+}
 
-    if (currentIndex >= slides.length - 1) {
+function displayNextGhost(){
+  document.getElementById("next-ghost-slide").innerHTML = "";
+  var currentIndex = slides.indexOf(currentSlide);
+  var previousIndex = slides.indexOf(currentSlide) - 1;
+  var nextIndex = slides.indexOf(currentSlide) + 1;
+
+  if (currentIndex >= slides.length - 1) {
 
       $('#next-ghost-slide').css("background-color", "d3d3d3");
     } else{
@@ -721,11 +733,10 @@ function displayGhost(){
     document.getElementById("next-ghost-slide").appendChild(nextSlide);
   }
 }
-  
-}
 
 $('body').click(function() {
-  displayGhost();
+  displayPreviousGhost();
+  displayNextGhost();
 });
 
 window.onkeydown = function(e){
