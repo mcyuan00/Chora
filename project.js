@@ -601,6 +601,118 @@ function makeNewFormation(){
     }
   };
 
+displayGhost();
+
+function displayGhost(){
+  document.getElementById("previous-ghost-slide").innerHTML = "";
+  document.getElementById("next-ghost-slide").innerHTML = "";
+  var currentIndex = slides.indexOf(currentSlide);
+  var previousIndex = slides.indexOf(currentSlide) - 1;
+  var nextIndex = slides.indexOf(currentSlide) + 1;
+  console.log(currentIndex);
+  console.log(slides.length);
+
+  if (currentIndex <= 0){
+
+    $("#previous-ghost-slide").css("background-color", "d3d3d3");
+    $('#next-ghost-slide').css("background-color", "d3d3d3");
+
+  } else {
+    
+    $("#previous-ghost-slide").css("background-color", "white");
+    $("#next-ghost-slide").css("background-color", "white");
+
+    var previousSlide = slides[previousIndex].cloneNode(true);
+
+    previousSlide.style.display = "block";
+    previousSlide.style.position = "absolute";
+    previousSlide.style.height = "75px";
+    previousSlide.style.width="105px"
+
+    var nodes = previousSlide.childNodes;
+
+    for(var i=0; i<nodes.length; i++) {
+
+      if (nodes[i].hasChildNodes()){
+        console.log("its a transition");
+        var childnodes = nodes[i].childNodes;
+        for(var j = 0; j<childnodes.length; j++){
+          var nodeHeight = parseFloat(childnodes[j].style.height);
+          var nodeWidth = parseFloat(childnodes[j].style.width);
+          var nodeTop = parseFloat(childnodes[j].style.top);
+          var nodeLeft = parseFloat(childnodes[j].style.left);
+      
+          childnodes[j].style.height = nodeHeight * .2 + "px";
+          childnodes[j].style.width = nodeWidth * .2 + "px";
+          childnodes[j].style.top = nodeTop * .2 + "px";
+          childnodes[j].style.left = nodeLeft * .2 + "px";
+        }
+      }
+
+      var nodeHeight = parseFloat(nodes[i].style.height);
+      var nodeWidth = parseFloat(nodes[i].style.width);
+      var nodeTop = parseFloat(nodes[i].style.top);
+      var nodeLeft = parseFloat(nodes[i].style.left);
+      
+      nodes[i].style.height = nodeHeight * .2 + "px";
+      nodes[i].style.width = nodeWidth * .2 + "px";
+      nodes[i].style.top = nodeTop * .2 + "px";
+      nodes[i].style.left = nodeLeft * .2 + "px";
+    }
+    document.getElementById("previous-ghost-slide").appendChild(previousSlide);
+
+    if (currentIndex >= slides.length - 1) {
+
+      $('#next-ghost-slide').css("background-color", "d3d3d3");
+    } else{
+    var nextSlide = slides[nextIndex].cloneNode(true);
+
+    nextSlide.style.display = "block";
+    nextSlide.style.position = "absolute";
+    nextSlide.style.height = "75px";
+    nextSlide.style.width="105px"
+    var nextnodes = nextSlide.childNodes;
+
+    for(var i=0; i<nextnodes.length; i++) {
+
+      if (nextnodes[i].hasChildNodes()){
+        console.log("its a transition");
+        var childnextnodes = nextnodes[i].childNodes;
+        for(var j = 0; j<childnextnodes.length; j++){
+          var nextnodeHeight = parseFloat(childnextnodes[j].style.height);
+          var nextnodeWidth = parseFloat(childnextnodes[j].style.width);
+          var nextnodeTop = parseFloat(childnextnodes[j].style.top);
+          var nextnodeLeft = parseFloat(childnextnodes[j].style.left);
+      
+          childnextnodes[j].style.height = nextnodeHeight * .2 + "px";
+          childnextnodes[j].style.width = nextnodeWidth * .2 + "px";
+          childnextnodes[j].style.top = nextnodeTop * .2 + "px";
+          childnextnodes[j].style.left = nextnodeLeft * .2 + "px";
+        }
+      }
+
+      var nextnodeHeight = parseFloat(nextnodes[i].style.height);
+      var nextnodeWidth = parseFloat(nextnodes[i].style.width);
+      var nextnodeTop = parseFloat(nextnodes[i].style.top);
+      var nextnodeLeft = parseFloat(nextnodes[i].style.left);
+      
+      nextnodes[i].style.height = nextnodeHeight * .2 + "px";
+      nextnodes[i].style.width = nextnodeWidth * .2 + "px";
+      nextnodes[i].style.top = nextnodeTop * .2 + "px";
+      nextnodes[i].style.left = nextnodeLeft * .2 + "px";
+    }
+    document.getElementById("next-ghost-slide").appendChild(nextSlide);
+  }
+}
+  
+}
+
+$('body').click(function() {
+  displayGhost();
+});
+
+
+
 /*create a formation from template*/
 $(".formation").click(function(e){
   currentSlide.innerHTML = "";
