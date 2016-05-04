@@ -461,6 +461,7 @@ function makeNewFormation(){
     $('#menu').children().each( function() {
       this.style.display = "initial";
     });
+    document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
   } else if (slides.length >= 2) {
     var currentIndex = slides.indexOf(currentSlide);
     var background = document.getElementById("content");
@@ -482,6 +483,7 @@ function makeNewFormation(){
     fromPlotted = firstHalfArray.concat(lastHalfArray);
 
     document.getElementById('menu').style.display = "none";
+    document.getElementById('menu').style.width = $('#menu').children().length * 60 + "px";
     if (slides.length > 0) {
       for (var i = 0; i < slides.length; ++i) {
         slides[i].style.display = "none";
@@ -504,6 +506,7 @@ function makeNewFormation(){
     $('#menu').children().each( function() {
       this.style.display = "initial";
     });
+    document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
   }
 };
 
@@ -560,6 +563,18 @@ function makeNewFormation(){
       firstHalfArray.push([]);
       fromPlotted = firstHalfArray.concat(lastHalfArray);
 
+      $('#menu').children().each( function() {
+        if(isInArray(this.children[0].innerHTML, currentPlotted )){
+          this.style.display = "none";
+        } else {
+          this.style.display = "initial"; //makes visible
+        }
+      });
+
+      document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
+
+
+
       document.getElementById('menu').style.display = "none";
      if (slides.length > 0) {
         for (var i = 0; i < slides.length; ++i) {
@@ -597,6 +612,8 @@ function makeNewFormation(){
         }
       });
 
+      document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
+
 
     }
   };
@@ -604,6 +621,9 @@ function makeNewFormation(){
 /*create a formation from template*/
 $(".formation").click(function(e){
   currentSlide.innerHTML = "";
+  currentPlotted = [];
+  document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
+
   var emptyDancer1 = createEmptyDancer();
   var emptyDancer2 = createEmptyDancer();
   var emptyDancer3 = createEmptyDancer();
@@ -930,6 +950,8 @@ $('#next-btn').click(function(e){
         this.style.display = "initial"; //makes visible
       }
     });
+
+    document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
   }
 });
 
@@ -954,6 +976,7 @@ $('#previous-btn').click(function(e){
         this.style.display = "initial"; //makes visible
       }
     });
+    document.getElementById('menu').style.width = ($('#menu').children().length -  currentPlotted.length)*60 + "px"; 
   }
 });
 
