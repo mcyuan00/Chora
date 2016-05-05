@@ -30,7 +30,7 @@ canvas {
 
 #add {
   position: absolute;
-  top: 11%; left: 45%;
+  top: 11%; left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 50;
@@ -213,9 +213,9 @@ canvas {
 #logo {
   font-family: 'Amatic SC', cursive;
   font-size: 55pt;
-  margin: 0; padding: 0;
+  margin: 0; 
   color: #7addcd;
-  padding-left: 35px; padding-top: 8px;
+  padding-left: 35px; padding-top: 0px;
 }
 
 h2 {
@@ -302,7 +302,8 @@ content: "\f101";
 
 .tab-content {
   margin-left: 0px;
-  position: fixed;
+  position: absolute;
+  width: 250px;
   z-index: 40;
 }
 .tab-content .tab-pane {
